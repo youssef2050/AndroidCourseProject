@@ -25,51 +25,51 @@ public class Meal {
         Cash = cash;
     }
 
-    public void setMealTitle(String mealTitle) {
-        this.mealTitle = mealTitle;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setPrise(double prise) {
-        this.prise = prise;
-    }
-
-    public void setURLImage(String URLImage) {
-        this.URLImage = URLImage;
-    }
-
-    public void setCash(boolean cash) {
-        Cash = cash;
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public int getId() {
-        return id;
-    }
-
     public String getMealTitle() {
         return mealTitle;
+    }
+
+    public void setMealTitle(String mealTitle) {
+        this.mealTitle = mealTitle;
     }
 
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public double getPrise() {
         return prise;
+    }
+
+    public void setPrise(double prise) {
+        this.prise = prise;
     }
 
     public String getURLImage() {
         return URLImage;
     }
 
+    public void setURLImage(String URLImage) {
+        this.URLImage = URLImage;
+    }
+
     public boolean isCash() {
         return Cash;
+    }
+
+    public void setCash(boolean cash) {
+        Cash = cash;
     }
 }

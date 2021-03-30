@@ -14,7 +14,7 @@
         android:id="@+id/homeFragment"
         android:name="com.menu.androidcourseproject.ui.Home.HomeFragment"
         android:label="home_fragment"
-        tools:layout="@layout/home_fragment" >
+        tools:layout="@layout/home_fragment">
         <action
             android:id="@+id/action_homeFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
@@ -23,7 +23,7 @@
         android:id="@+id/loginFragment"
         android:name="com.menu.androidcourseproject.ui.Login.LoginFragment"
         android:label="login_fragment"
-        tools:layout="@layout/login_fragment" >
+        tools:layout="@layout/login_fragment">
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -45,7 +45,7 @@
         android:id="@+id/registerFragment"
         android:name="com.menu.androidcourseproject.ui.Register.RegisterFragment"
         android:label="register_fragment"
-        tools:layout="@layout/register_fragment" >
+        tools:layout="@layout/register_fragment">
         <action
             android:id="@+id/action_registerFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -54,7 +54,7 @@
         android:id="@+id/settingsFragment"
         android:name="com.menu.androidcourseproject.ui.Settings.SettingsFragment"
         android:label="settings_fragment"
-        tools:layout="@layout/settings_fragment" >
+        tools:layout="@layout/settings_fragment">
         <action
             android:id="@+id/action_settingsFragment_to_purchaseListFragment"
             app:destination="@id/purchaseListFragment" />

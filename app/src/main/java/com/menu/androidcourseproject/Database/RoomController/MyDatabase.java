@@ -15,14 +15,8 @@ import com.menu.androidcourseproject.Model.User;
 
 @Database(entities = {User.class, Meal.class, Purchase.class}, version = 2, exportSchema = false)
 public abstract class MyDatabase extends RoomDatabase {
-    private static MyDatabase instance;
     public static final String DATABASE_NAME = "project_database.db";
-
-    public abstract UserDao userDao();
-
-    public abstract MealDao mealDao();
-
-    public abstract PurchaseDao purchaseDao();
+    private static MyDatabase instance;
 
     public static synchronized MyDatabase getInstance(Context context) {
         if (instance == null) {
@@ -32,4 +26,10 @@ public abstract class MyDatabase extends RoomDatabase {
         }
         return instance;
     }
+
+    public abstract UserDao userDao();
+
+    public abstract MealDao mealDao();
+
+    public abstract PurchaseDao purchaseDao();
 }
