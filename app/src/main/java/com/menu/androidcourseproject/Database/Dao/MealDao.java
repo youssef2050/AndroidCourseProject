@@ -1,4 +1,4 @@
-package com.menu.androidcourseproject.Database;
+package com.menu.androidcourseproject.Database.Dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
