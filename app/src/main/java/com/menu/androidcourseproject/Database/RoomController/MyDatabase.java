@@ -16,6 +16,7 @@ import com.menu.androidcourseproject.Model.User;
 @Database(entities = {User.class, Meal.class, Purchase.class}, version = 1)
 public abstract class MyDatabase extends RoomDatabase {
     private static MyDatabase instance;
+    public static final String DATABASE_NAME = "project_database.db";
 
     public abstract UserDao userDao();
 
@@ -25,7 +26,7 @@ public abstract class MyDatabase extends RoomDatabase {
 
     public static synchronized MyDatabase getInstance(Context context) {
         if (instance == null) {
-            instance = Room.databaseBuilder(context.getApplicationContext(), MyDatabase.class, "project_database")
+            instance = Room.databaseBuilder(context.getApplicationContext(), MyDatabase.class, DATABASE_NAME)
                     .fallbackToDestructiveMigration()
                     .build();
         }

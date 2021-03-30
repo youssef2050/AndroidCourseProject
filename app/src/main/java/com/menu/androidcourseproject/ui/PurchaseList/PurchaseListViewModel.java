@@ -1,7 +1,13 @@
 package com.menu.androidcourseproject.ui.PurchaseList;
 
-import androidx.lifecycle.ViewModel;
+import android.app.Application;
 
-public class PurchaseListViewModel extends ViewModel {
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+
+public class PurchaseListViewModel extends AndroidViewModel {
+    public PurchaseListViewModel(@NonNull Application application) {
+        super(application);
+    }
     // TODO: Implement the ViewModel
 }

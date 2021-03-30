@@ -1,12 +1,15 @@
 package com.menu.androidcourseproject.Model;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-@Entity
+
+@Entity(primaryKeys = {"mealId", "date"})
 public class Purchase {
+
     @ForeignKey(entity = Meal.class, parentColumns = {"id"}, childColumns = {"mealId"})
     private int mealId;
-    private String date;
+    @NonNull private String date;
 
     public Purchase(int mealId, String date) {
         this.mealId = mealId;

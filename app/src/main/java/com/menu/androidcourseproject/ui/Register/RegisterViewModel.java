@@ -1,7 +1,13 @@
 package com.menu.androidcourseproject.ui.Register;
 
-import androidx.lifecycle.ViewModel;
+import android.app.Application;
 
-public class RegisterViewModel extends ViewModel {
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+
+public class RegisterViewModel extends AndroidViewModel {
+    public RegisterViewModel(@NonNull Application application) {
+        super(application);
+    }
     // TODO: Implement the ViewModel
 }

@@ -1,7 +1,13 @@
 package com.menu.androidcourseproject.ui.Details;
 
-import androidx.lifecycle.ViewModel;
+import android.app.Application;
 
-public class DetailsViewModel extends ViewModel {
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+
+public class DetailsViewModel extends AndroidViewModel {
+    public DetailsViewModel(@NonNull Application application) {
+        super(application);
+    }
     // TODO: Implement the ViewModel
 }

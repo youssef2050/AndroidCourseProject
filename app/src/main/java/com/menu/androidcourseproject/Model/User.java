@@ -74,4 +74,8 @@ public class User {
     public boolean isMale() {
         return Male;
     }
+
+    public String getURLImage() {
+        return URLImage;
+    }
 }
