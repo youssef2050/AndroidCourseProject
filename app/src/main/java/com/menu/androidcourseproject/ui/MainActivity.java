@@ -1,6 +1,7 @@
 package com.menu.androidcourseproject.ui;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -31,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
                 "test");
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         userViewModel.insert(user);
+    }
+
+    public void login(View view) {
         userViewModel.login("youssef2050", "123456")
                 .observe(this, new Observer<List<User>>() {
                     @Override

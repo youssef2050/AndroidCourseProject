@@ -1,4 +1,4 @@
-package com.menu.androidcourseproject.Database.RoomController;
+package com.menu.androidcourseproject.Database.RoomController.Repository;
 
 import android.app.Application;
 import android.os.AsyncTask;
@@ -7,6 +7,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 
 import com.menu.androidcourseproject.Database.Dao.UserDao;
+import com.menu.androidcourseproject.Database.RoomController.MyDatabase;
 import com.menu.androidcourseproject.Model.User;
 
 import java.util.List;

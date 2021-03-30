@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.menu.androidcourseproject.Database.RoomController.UserRepository;
+import com.menu.androidcourseproject.Database.RoomController.Repository.UserRepository;
 import com.menu.androidcourseproject.Model.User;
 
 import java.util.List;
