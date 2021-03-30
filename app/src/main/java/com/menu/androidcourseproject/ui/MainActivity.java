@@ -23,24 +23,22 @@ public class MainActivity extends AppCompatActivity {
         User user = new User("youssef ezzeldeen",
                 "yousf2050@homtail.com",
                 "yousf2050",
-                "123456",
+                "1234567",
                 "ps",
                 "18/8/1998",
                 "0592280825",
                 true,
                 true,
                 "test");
+        user.setId(1);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        userViewModel.insert(user);
+        userViewModel.update(user);
     }
 
     public void login(View view) {
-        userViewModel.login("youssef2050", "123456")
-                .observe(this, new Observer<List<User>>() {
-                    @Override
-                    public void onChanged(List<User> users) {
-                        System.out.println(users.size());
-                    }
-                });
+        userViewModel.login("yousf2050", "1234567").observe(this, user -> {
+            if (user != null)
+                System.out.println(user.getFullName());
+        });
     }
 }

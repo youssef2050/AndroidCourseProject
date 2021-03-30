@@ -20,8 +20,11 @@ public interface UserDao {
 
 
     @Query("Select * from User where id = :id")
-    LiveData<List<User>> getUser(int id);
+    LiveData<User> getUser(int id);
 
-    @Query("select * from user where username =:username and password =:password")
-    LiveData<List<User>> login(String username, String password);
+    @Query("select * from User where username =:username and password =:password")
+    LiveData<User> login(String username, String password);
+
+    @Query("select * from user")
+    LiveData<List<User>> getAllUsers();
 }

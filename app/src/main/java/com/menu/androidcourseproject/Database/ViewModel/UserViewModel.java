@@ -1,7 +1,6 @@
 package com.menu.androidcourseproject.Database.ViewModel;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -22,16 +21,23 @@ public class UserViewModel extends AndroidViewModel {
         userRepository = new UserRepository(application);
     }
 
-    public LiveData<List<User>> login(String username, String password) {
+    public LiveData<User> login(String username, String password) {
         return userRepository.login(username, password);
     }
 
-    public LiveData<List<User>> getUser(int id) {
+    public LiveData<User> getUser(int id) {
         return userRepository.getUser(id);
     }
 
     public void insert(User user) {
         userRepository.insert(user);
-        Log.d(TAG, "insert: user");
+    }
+
+    public void update(User user) {
+        userRepository.update(user);
+    }
+
+    public LiveData<List<User>> getAllUsers() {
+        return userRepository.getGetAllUsers();
     }
 }
