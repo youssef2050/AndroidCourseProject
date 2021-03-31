@@ -1,29 +1,38 @@
 package com.menu.androidcourseproject.Model;
 
+import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import com.bumptech.glide.Glide;
+
+import org.jetbrains.annotations.NotNull;
 
 @Entity
 public class Meal {
     @PrimaryKey(autoGenerate = true)
     private int id;
-
     private String mealTitle;
     private String description;
     private double prise;
     private String URLImage;
     private boolean Cash;
+    private double rate;
 
     public Meal() {
     }
 
-    public Meal(String mealTitle, String description, double prise, String URLImage, boolean cash) {
+    public Meal(String mealTitle, String description, double prise, String URLImage, boolean cash, double rate) {
         this.mealTitle = mealTitle;
         this.description = description;
         this.prise = prise;
         this.URLImage = URLImage;
         Cash = cash;
+        this.rate = rate;
     }
+
 
     public int getId() {
         return id;
@@ -71,5 +80,35 @@ public class Meal {
 
     public void setCash(boolean cash) {
         Cash = cash;
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
+    @NotNull
+    @Override
+    public String toString() {
+        return "Meal{" +
+                "id=" + id +
+                ", mealTitle='" + mealTitle + '\'' +
+                ", description='" + description + '\'' +
+                ", prise=" + prise +
+                ", URLImage='" + URLImage + '\'' +
+                ", Cash=" + Cash +
+                ", reat=" + rate +
+                '}';
+    }
+
+
+    @BindingAdapter("android:loadImage")
+    public static void loadImage(ImageView imageView, String imageUrl) {
+        Glide.with(imageView)
+                .load(imageUrl)
+                .into(imageView);
     }
 }

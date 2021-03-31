@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="layout_background">#ebf4fc</color>
-    <color name="button_background">#49788f</color>
-    <color name="text_color">#7c9cad</color>
-    <color name="textView_color">#10a6fe</color>
-    <color name="stroke_color">#f5f9fd</color>
-    <color name="hint_color">#c7d5db</color>
-    <color name="white">#ffffff</color>
-    <color name="black">#000000</color>
+    <color name="yellow100">#fff3d4</color>
+    <color name="yellow200">#ffe7a9</color>
+    <color name="yellow300">#feda7f</color>
+    <color name="yellow400">#fed264</color>
+    <color name="yellow500">#fec641</color>
+    <color name="yellow600">#d69c22</color>
+    <color name="yellow700">#966d15</color>
+    <color name="yellow800">#563f08</color>
+    <color name="yellow900">#150f01</color>
+    <color name="white">#FFF</color>
+
 </resources>
