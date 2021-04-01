@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.Register.RegisterFragment">
+    tools:context=".ui.register.RegisterFragment">
     <EditText
         android:id="@+id/editTextTextPersonName"
         android:layout_width="0dp"

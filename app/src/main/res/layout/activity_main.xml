@@ -13,8 +13,8 @@
         tools:context=".ui.MainActivity">
 
         <fragment
-            android:id="@+id/fragment"
-            android:name="com.menu.androidcourseproject.ui.Home.HomeFragment"
+            android:id="@+id/fragment_item"
+            android:name="com.menu.androidcourseproject.ui.home.HomeFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:defaultNavHost="true"

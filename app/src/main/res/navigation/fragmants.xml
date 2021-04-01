@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.menu.androidcourseproject.ui.Details.DetailsFragment"
+        android:name="com.menu.androidcourseproject.ui.details.DetailsFragment"
         android:label="details_fragment"
         tools:layout="@layout/details_fragment" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.menu.androidcourseproject.ui.Home.HomeFragment"
+        android:name="com.menu.androidcourseproject.ui.home.HomeFragment"
         android:label="home_fragment"
         tools:layout="@layout/home_fragment">
         <action
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.menu.androidcourseproject.ui.Login.LoginFragment"
+        android:name="com.menu.androidcourseproject.ui.login.LoginFragment"
         android:label="login_fragment"
         tools:layout="@layout/login_fragment">
         <action
@@ -33,17 +33,17 @@
     </fragment>
     <fragment
         android:id="@+id/newItemFragment"
-        android:name="com.menu.androidcourseproject.ui.NewItem.NewItemFragment"
+        android:name="com.menu.androidcourseproject.ui.new_meal.NewItemFragment"
         android:label="new_item_fragment"
         tools:layout="@layout/new_item_fragment" />
     <fragment
         android:id="@+id/purchaseListFragment"
-        android:name="com.menu.androidcourseproject.ui.PurchaseList.PurchaseListFragment"
+        android:name="com.menu.androidcourseproject.ui.purchase_list.PurchaseListFragment"
         android:label="purchase_list_fragment"
         tools:layout="@layout/purchase_list_fragment" />
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.menu.androidcourseproject.ui.Register.RegisterFragment"
+        android:name="com.menu.androidcourseproject.ui.register.RegisterFragment"
         android:label="register_fragment"
         tools:layout="@layout/register_fragment">
         <action
@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.menu.androidcourseproject.ui.Settings.SettingsFragment"
+        android:name="com.menu.androidcourseproject.ui.settings.SettingsFragment"
         android:label="settings_fragment"
         tools:layout="@layout/settings_fragment">
         <action
