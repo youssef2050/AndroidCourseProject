@@ -15,14 +15,10 @@ import com.menu.androidcourseproject.adapters.MealAdapter;
 import com.menu.androidcourseproject.databinding.HomeFragmentBinding;
 import com.menu.androidcourseproject.model.Meal;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class HomeFragment extends Fragment implements MealAdapter.onClickButtons {
 
     private HomeViewModel mViewModel;
     private HomeFragmentBinding homeFragmentBinding;
-    private List<Meal> meals;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -38,24 +34,26 @@ public class HomeFragment extends Fragment implements MealAdapter.onClickButtons
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        meals = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            Meal meal = new Meal("test" + i, "ymym" + i, 15.4, "https://picsum.photos/id/" + (237 + i) + "/200", true, 3.5);
-            mViewModel.insert(meal);
-            meals.add(meal);
-        }
+
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mViewModel = new ViewModelProvider(getActivity()).get(HomeViewModel.class);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         MealAdapter mealAdapter = new MealAdapter(this);
-        mealAdapter.setMeals(meals);
         homeFragmentBinding.rvMeal.setHasFixedSize(true);
         homeFragmentBinding.rvMeal.setItemViewCacheSize(15);
         homeFragmentBinding.rvMeal.setAdapter(mealAdapter);
-        mViewModel.meals.observe(getViewLifecycleOwner(), meals -> mealAdapter.setMeals(meals));
+        mViewModel.meals.observe(getViewLifecycleOwner(), meals -> {
+            if (meals != null)
+                mealAdapter.setMeals(meals);
+        });
     }
 
     @Override

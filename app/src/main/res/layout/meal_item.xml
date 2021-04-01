@@ -22,7 +22,6 @@
                 android:id="@+id/iv_meal_img"
                 android:layout_width="0dp"
                 android:layout_height="250dp"
-                android:loadImage="@{meal.URLImage}"
                 android:scaleType="fitXY"
                 android:src="@drawable/beef"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -7,9 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.menu.androidcourseproject.model.Meal;
 import com.menu.androidcourseproject.R;
 import com.menu.androidcourseproject.databinding.MealItemBinding;
+import com.menu.androidcourseproject.model.Meal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +35,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyHolder> {
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
         Meal meal = meals.get(position);
         if (meal != null) {
+            System.out.println(meal.getMealTitle());
             holder.mealItemBinding.setMeal(meal);
             holder.mealItemBinding.executePendingBindings();
         }

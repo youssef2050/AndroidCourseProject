@@ -24,11 +24,12 @@ public class MealRepository {
         MyDatabase myDatabase = MyDatabase.getInstance(application.getApplicationContext());
         mealDao = myDatabase.mealDao();
         getAllMeal = mealDao.getAllMeal();
+        System.out.println(TAG + " meal size :" + getAllMeal);
     }
 
     public void insert(Meal meal) {
         Completable.fromAction(() -> mealDao.insert(meal))
-                .observeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> Log.d(TAG, "insert: "),
                         throwable -> Log.e(TAG, "insert: error", throwable));
@@ -36,7 +37,7 @@ public class MealRepository {
 
     public void update(Meal meal) {
         Completable.fromAction(() -> mealDao.update(meal))
-                .observeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> Log.d(TAG, "update: "),
                         throwable -> Log.e(TAG, "update: error", throwable));
@@ -44,7 +45,7 @@ public class MealRepository {
 
     public void delete(Meal meal) {
         Completable.fromAction(() -> mealDao.delete(meal))
-                .observeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> Log.d(TAG, "delete: "),
                         throwable -> Log.e(TAG, "delete: error", throwable));
