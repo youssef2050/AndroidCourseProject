@@ -8,7 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
+import com.menu.androidcourseproject.R;
 import com.menu.androidcourseproject.databinding.ActivityMainBinding;
 import com.menu.androidcourseproject.model.User;
 import com.menu.androidcourseproject.ui.register.RegisterViewModel;
@@ -22,7 +25,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(activityMainBinding.getRoot());
-        statusBarStyle(getWindow());
+//        statusBarStyle(getWindow());
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment);
+        NavController navCo = navHostFragment.getNavController();
         final User user = new User("youssef",
                 "youssef@tests.com",
                 "youssf2080",
@@ -58,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        return navController.navigateUp();
-
+        return navController.navigateUp() || super.onSupportNavigateUp();
     }
 }

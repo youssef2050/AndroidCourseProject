@@ -22,15 +22,17 @@ public class Meal {
     private String URLImage;
     private boolean Cash;
     private double rate;
+    private boolean favorite;
     public static List<Meal> MEALS;
 
-    public Meal(String mealTitle, String description, double prise, String URLImage, boolean cash, double rate) {
+    public Meal(String mealTitle, String description, double prise, String URLImage, boolean cash, double rate, boolean favorite) {
         this.mealTitle = mealTitle;
         this.description = description;
         this.prise = prise;
         this.URLImage = URLImage;
         Cash = cash;
         this.rate = rate;
+        this.favorite = favorite;
     }
 
     public Meal() {
@@ -100,6 +102,14 @@ public class Meal {
 
     public void setRate(double rate) {
         this.rate = rate;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
     }
 
     @NotNull

@@ -1,5 +1,7 @@
 package com.menu.androidcourseproject.ui.home;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -7,13 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
+import com.menu.androidcourseproject.R;
 import com.menu.androidcourseproject.adapters.MealAdapter;
 import com.menu.androidcourseproject.databinding.HomeFragmentBinding;
 import com.menu.androidcourseproject.model.Meal;
@@ -44,13 +47,13 @@ public class HomeFragment extends Fragment implements MealAdapter.onClickButtons
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewModel = new ViewModelProvider(getActivity()).get(HomeViewModel.class);
-//        Meal meal1 = new Meal("1", "1111", 150, "https://www.picsum.photos/id/238/200", true, 1.5);
-//        Meal meal2 = new Meal("2", "2222", 250, "https://www.picsum.photos/id/239/200", false, 2.5);
-//        Meal meal3 = new Meal("3", "3333", 350, "https://www.picsum.photos/id/240/200", false, 3.5);
-//        Meal meal4 = new Meal("4", "4444", 450, "https://www.picsum.photos/id/241/200", true, 4.5);
-//        Meal meal5 = new Meal("5", "5555", 550, "https://www.picsum.photos/id/242/200", false, 5);
-//        Meal meal6 = new Meal("6", "6666", 650, "https://www.picsum.photos/id/243/200", true, 4.6);
-//        Meal meal7 = new Meal("7", "7777", 750, "https://www.picsum.photos/id/244/200", true, 3.7);
+//        Meal meal1 = new Meal("1", "1111", 150, "https://www.picsum.photos/id/238/200", true, 1.5, true);
+//        Meal meal2 = new Meal("2", "2222", 250, "https://www.picsum.photos/id/239/200", false, 2.5, true);
+//        Meal meal3 = new Meal("3", "3333", 350, "https://www.picsum.photos/id/240/200", false, 3.5, true);
+//        Meal meal4 = new Meal("4", "4444", 450, "https://www.picsum.photos/id/241/200", true, 4.5, false);
+//        Meal meal5 = new Meal("5", "5555", 550, "https://www.picsum.photos/id/242/200", false, 5, true);
+//        Meal meal6 = new Meal("6", "6666", 650, "https://www.picsum.photos/id/243/200", true, 4.6, false);
+//        Meal meal7 = new Meal("7", "7777", 750, "https://www.picsum.photos/id/244/200", true, 3.7, true);
 //        mViewModel.insert(meal1);
 //        mViewModel.insert(meal2);
 //        mViewModel.insert(meal3);
@@ -76,7 +79,6 @@ public class HomeFragment extends Fragment implements MealAdapter.onClickButtons
         homeFragmentBinding.edSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -119,11 +121,25 @@ public class HomeFragment extends Fragment implements MealAdapter.onClickButtons
 
     @Override
     public void share(Meal meal) {
-        Toast.makeText(getContext(), "share", Toast.LENGTH_LONG).show();
+        String text = meal.getMealTitle();
+        Uri imageUri = Uri.parse(meal.getURLImage());
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, text);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+        shareIntent.setType("image/*");
+        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        startActivity(Intent.createChooser(shareIntent, "Share images..."));
     }
 
     @Override
     public void fav(Meal meal) {
-        Toast.makeText(getContext(), "fav", Toast.LENGTH_SHORT).show();
+        meal.setFavorite(!meal.isFavorite());
+        mViewModel.update(meal);
+    }
+
+    @Override
+    public void details(Meal meal) {
+        Navigation.findNavController(getActivity(), R.id.detailsFragment);
     }
 }

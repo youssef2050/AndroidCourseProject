@@ -1,9 +1,11 @@
 package com.menu.androidcourseproject.adapters;
 
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.menu.androidcourseproject.databinding.MealItemBinding;
@@ -84,11 +86,13 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyHolder> {
     public class MyHolder extends RecyclerView.ViewHolder {
         MealItemBinding mealItemBinding;
 
+        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         public MyHolder(@NonNull MealItemBinding mealItemBinding) {
             super(mealItemBinding.getRoot());
             this.mealItemBinding = mealItemBinding;
             mealItemBinding.butShare.setOnClickListener(v -> onClickButtons.share(meals.get(getAdapterPosition())));
             mealItemBinding.butFav.setOnClickListener(v -> onClickButtons.fav(meals.get(getAdapterPosition())));
+            mealItemBinding.cvItem.setOnClickListener(v -> onClickButtons.details(meals.get(getAdapterPosition())));
         }
     }
 
@@ -102,5 +106,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyHolder> {
         void share(Meal meal);
 
         void fav(Meal meal);
+
+        void details(Meal meal);
     }
 }
