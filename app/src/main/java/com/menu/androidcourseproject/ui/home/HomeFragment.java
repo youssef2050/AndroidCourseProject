@@ -6,6 +6,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ public class HomeFragment extends Fragment implements MealAdapter.onClickButtons
 
     private HomeViewModel mViewModel;
     private HomeFragmentBinding homeFragmentBinding;
+    private boolean isClick = true;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -65,7 +67,6 @@ public class HomeFragment extends Fragment implements MealAdapter.onClickButtons
         homeFragmentBinding.rvMeal.setHasFixedSize(true);
         homeFragmentBinding.rvMeal.setItemViewCacheSize(15);
         homeFragmentBinding.rvMeal.setAdapter(mealAdapter);
-//        homeFragmentBinding.rvMeal.setLayoutManager(new LinearLayoutManager(getContext()));
         mViewModel.meals.observe(getViewLifecycleOwner(), meals -> {
             if (meals != null) {
                 mealAdapter.setMeals(meals);
@@ -86,6 +87,32 @@ public class HomeFragment extends Fragment implements MealAdapter.onClickButtons
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+        homeFragmentBinding.butFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isClick) {
+                    homeFragmentBinding.list.setVisibility(View.VISIBLE);
+                    isClick = !isClick;
+                } else {
+                    homeFragmentBinding.cash.setChecked(false);
+                    homeFragmentBinding.installment.setChecked(false);
+                    mealAdapter.send("");
+                    homeFragmentBinding.list.setVisibility(View.GONE);
+                    isClick = !isClick;
+                }
+            }
+        });
+        homeFragmentBinding.rgList.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                mealAdapter.send("");
+                if (checkedId == homeFragmentBinding.cash.getId()) {
+                    mealAdapter.send(homeFragmentBinding.cash.getText());
+                } else if (checkedId == homeFragmentBinding.installment.getId()) {
+                    mealAdapter.send(homeFragmentBinding.installment.getText());
+                }
             }
         });
     }

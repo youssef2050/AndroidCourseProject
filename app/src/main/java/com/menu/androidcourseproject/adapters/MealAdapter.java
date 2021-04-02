@@ -59,6 +59,28 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyHolder> {
         }
     }
 
+    public void send(CharSequence text) {
+        if (text.equals("كاش")) {
+            List<Meal> filter = new ArrayList<>();
+            for (Meal meal : meals) {
+                if (meal.isCash()) {
+                    filter.add(meal);
+                }
+            }
+            setMeals(filter);
+        } else if (text.equals("تقسيط")) {
+            List<Meal> filter = new ArrayList<>();
+            for (Meal meal : meals) {
+                if (!meal.isCash()) {
+                    filter.add(meal);
+                }
+            }
+            setMeals(filter);
+        } else {
+            setMeals(Meal.MEALS);
+        }
+    }
+
     public class MyHolder extends RecyclerView.ViewHolder {
         MealItemBinding mealItemBinding;
 
