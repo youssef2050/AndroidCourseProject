@@ -4,10 +4,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.menu.androidcourseproject.R;
 import com.menu.androidcourseproject.databinding.MealItemBinding;
 import com.menu.androidcourseproject.model.Meal;
 
@@ -27,7 +25,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyHolder> {
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        MealItemBinding mealItemBinding = DataBindingUtil.inflate(layoutInflater, R.layout.meal_item, parent, false);
+        MealItemBinding mealItemBinding = MealItemBinding.inflate(layoutInflater, parent, false);
         return new MyHolder(mealItemBinding);
     }
 
@@ -35,7 +33,6 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyHolder> {
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
         Meal meal = meals.get(position);
         if (meal != null) {
-            System.out.println(meal.getMealTitle());
             holder.mealItemBinding.setMeal(meal);
             holder.mealItemBinding.executePendingBindings();
         }
@@ -46,6 +43,20 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyHolder> {
         if (meals == null)
             meals = new ArrayList<>();
         return meals.size();
+    }
+
+    public void filter(CharSequence s) {
+        if (s.length() != 0) {
+            List<Meal> filter = new ArrayList<>();
+            for (Meal meal : meals) {
+                if (meal.getMealTitle().contains(s) || meal.getDescription().contains(s)) {
+                    filter.add(meal);
+                }
+            }
+            setMeals(filter);
+        } else {
+            setMeals(Meal.MEALS);
+        }
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {

@@ -3,16 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="meal"
-            type="com.menu.androidcourseproject.model.Meal"/>
+            type="com.menu.androidcourseproject.model.Meal" />
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        app:cardCornerRadius="25dp">
+        app:cardCornerRadius="50dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -22,6 +23,7 @@
                 android:id="@+id/iv_meal_img"
                 android:layout_width="0dp"
                 android:layout_height="250dp"
+                android:loadImage="@{meal.URLImage}"
                 android:scaleType="fitXY"
                 android:src="@drawable/beef"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -72,15 +74,16 @@
 
                     <TextView
                         android:id="@+id/tv_meal_prise"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="72dp"
+                        android:layout_marginLeft="72dp"
+                        android:layout_marginTop="8dp"
                         android:gravity="center"
                         android:text="@{String.valueOf(meal.prise)+`$`,default=`50$`}"
                         android:textColor="#CECDCE"
                         android:textSize="18sp"
-                        app:layout_constraintEnd_toEndOf="@+id/tv_meal_titel"
-                        app:layout_constraintStart_toStartOf="@+id/tv_meal_titel"
+                        app:layout_constraintStart_toEndOf="@+id/but_share"
                         app:layout_constraintTop_toBottomOf="@+id/tv_meal_titel" />
 
                     <ImageButton
@@ -93,6 +96,20 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1.0" />
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{meal.cash ? `كاش`:`تقسيط`,default = `كاش`}"
+                        android:textColor="#CECDCE"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_meal_prise"
+                        app:layout_constraintEnd_toStartOf="@+id/but_fav"
+                        app:layout_constraintHorizontal_bias="0.277"
+                        app:layout_constraintStart_toEndOf="@+id/tv_meal_prise"
+                        app:layout_constraintTop_toTopOf="@+id/tv_meal_prise"
                         app:layout_constraintVertical_bias="1.0" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>

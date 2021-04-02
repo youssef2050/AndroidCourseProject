@@ -1,5 +1,8 @@
 package com.menu.androidcourseproject.model;
 
+import android.text.TextUtils;
+import android.util.Patterns;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -77,5 +80,25 @@ public class User {
 
     public String getURLImage() {
         return URLImage;
+    }
+
+    private boolean isValidEmail() {
+        System.out.println("is email");
+        return email != null && !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    private boolean isValidPassword() {
+        System.out.println("is password");
+        return password != null && !TextUtils.isEmpty(password) && password.length() >= 8;
+    }
+
+    private boolean isValidPhone() {
+        System.out.println("is phone");
+        return phone != null && !TextUtils.isEmpty(phone) && Patterns.PHONE.matcher(phone).matches();
+    }
+
+    public boolean isOk() {
+        System.out.println(String.valueOf(isValidEmail()) + " " + isValidPassword() + " " + isValidPhone());
+        return isValidEmail() && isValidPassword() && isValidPhone();
     }
 }

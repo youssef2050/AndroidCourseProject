@@ -1,6 +1,8 @@
 package com.menu.androidcourseproject.ui.home;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,13 +36,26 @@ public class HomeFragment extends Fragment implements MealAdapter.onClickButtons
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewModel = new ViewModelProvider(getActivity()).get(HomeViewModel.class);
+//        Meal meal1 = new Meal("1", "1111", 150, "https://www.picsum.photos/id/238/200", true, 1.5);
+//        Meal meal2 = new Meal("2", "2222", 250, "https://www.picsum.photos/id/239/200", false, 2.5);
+//        Meal meal3 = new Meal("3", "3333", 350, "https://www.picsum.photos/id/240/200", false, 3.5);
+//        Meal meal4 = new Meal("4", "4444", 450, "https://www.picsum.photos/id/241/200", true, 4.5);
+//        Meal meal5 = new Meal("5", "5555", 550, "https://www.picsum.photos/id/242/200", false, 5);
+//        Meal meal6 = new Meal("6", "6666", 650, "https://www.picsum.photos/id/243/200", true, 4.6);
+//        Meal meal7 = new Meal("7", "7777", 750, "https://www.picsum.photos/id/244/200", true, 3.7);
+//        mViewModel.insert(meal1);
+//        mViewModel.insert(meal2);
+//        mViewModel.insert(meal3);
+//        mViewModel.insert(meal4);
+//        mViewModel.insert(meal5);
+//        mViewModel.insert(meal6);
+//        mViewModel.insert(meal7);
     }
 
     @Override
@@ -50,9 +65,28 @@ public class HomeFragment extends Fragment implements MealAdapter.onClickButtons
         homeFragmentBinding.rvMeal.setHasFixedSize(true);
         homeFragmentBinding.rvMeal.setItemViewCacheSize(15);
         homeFragmentBinding.rvMeal.setAdapter(mealAdapter);
+//        homeFragmentBinding.rvMeal.setLayoutManager(new LinearLayoutManager(getContext()));
         mViewModel.meals.observe(getViewLifecycleOwner(), meals -> {
-            if (meals != null)
+            if (meals != null) {
                 mealAdapter.setMeals(meals);
+                Meal.MEALS = meals;
+            }
+        });
+        homeFragmentBinding.edSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mealAdapter.filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
         });
     }
 

@@ -10,6 +10,8 @@ import com.bumptech.glide.Glide;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 @Entity
 public class Meal {
     @PrimaryKey(autoGenerate = true)
@@ -20,6 +22,7 @@ public class Meal {
     private String URLImage;
     private boolean Cash;
     private double rate;
+    public static List<Meal> MEALS;
 
     public Meal(String mealTitle, String description, double prise, String URLImage, boolean cash, double rate) {
         this.mealTitle = mealTitle;

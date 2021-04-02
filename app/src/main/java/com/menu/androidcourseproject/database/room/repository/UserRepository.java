@@ -55,4 +55,8 @@ public class UserRepository {
     public LiveData<List<User>> getGetAllUsers() {
         return getAllUsers;
     }
+
+    public LiveData<User> checkUsernameAndEmail(String email, String username) {
+        return userDao.checkUsername(email,username);
+    }
 }

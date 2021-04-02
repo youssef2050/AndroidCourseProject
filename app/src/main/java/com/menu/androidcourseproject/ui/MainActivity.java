@@ -5,9 +5,13 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 
 import com.menu.androidcourseproject.databinding.ActivityMainBinding;
+import com.menu.androidcourseproject.model.User;
+import com.menu.androidcourseproject.ui.register.RegisterViewModel;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding activityMainBinding;
@@ -17,8 +21,35 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
-
+        setContentView(activityMainBinding.getRoot());
         statusBarStyle(getWindow());
+        final User user = new User("youssef",
+                "youssef@tests.com",
+                "youssf2080",
+                "12345679",
+                "ps",
+                "18/8/1998",
+                "0592280825",
+                true,
+                true,
+                "https://www.picsum.photos/id/244/200");
+        RegisterViewModel registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
+        if (user.isOk()) {
+            System.out.println("is ok");
+            registerViewModel.checkUsernameAndEmail(user.getEmail(), user.getUsername()).observe(this, new Observer<User>() {
+                @Override
+                public void onChanged(User users) {
+                    if (users == null) {
+                        System.out.println("user is null");
+                        registerViewModel.insert(user);
+                    }
+                }
+            });
+
+        }
+        registerViewModel.getAllUser().observe(this, users -> {
+            System.out.println(users.size());
+        });
     }
 
     private void statusBarStyle(Window w) {
