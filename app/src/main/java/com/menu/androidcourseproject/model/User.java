@@ -20,8 +20,10 @@ public class User {
     private boolean Administrator;
     private boolean Male;
     private String URLImage;
+    private boolean verified;
 
-    public User(String fullName, String email, String username, String password, String country, String birthDate, String phone, boolean Administrator, boolean Male, String URLImage) {
+
+    public User(String fullName, String email, String username, String password, String country, String birthDate, String phone, boolean administrator, boolean male, String URLImage, boolean verified) {
         this.fullName = fullName;
         this.email = email;
         this.username = username;
@@ -29,9 +31,13 @@ public class User {
         this.country = country;
         this.birthDate = birthDate;
         this.phone = phone;
-        this.Administrator = Administrator;
-        this.Male = Male;
+        Administrator = administrator;
+        Male = male;
         this.URLImage = URLImage;
+        this.verified = verified;
+    }
+
+    public User() {
     }
 
     public int getId() {
@@ -82,12 +88,16 @@ public class User {
         return URLImage;
     }
 
+    public boolean isVerified() {
+        return verified;
+    }
+
     private boolean isValidEmail() {
         System.out.println("is email");
         return email != null && !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-    private boolean isValidPassword() {
+    public boolean isValidPassword() {
         System.out.println("is password");
         return password != null && !TextUtils.isEmpty(password) && password.length() >= 8;
     }
@@ -95,6 +105,50 @@ public class User {
     private boolean isValidPhone() {
         System.out.println("is phone");
         return phone != null && !TextUtils.isEmpty(phone) && Patterns.PHONE.matcher(phone).matches();
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setAdministrator(boolean administrator) {
+        Administrator = administrator;
+    }
+
+    public void setMale(boolean male) {
+        Male = male;
+    }
+
+    public void setURLImage(String URLImage) {
+        this.URLImage = URLImage;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
     }
 
     public boolean isOk() {

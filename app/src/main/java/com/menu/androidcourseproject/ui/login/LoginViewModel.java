@@ -4,10 +4,23 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
+import com.menu.androidcourseproject.database.room.repository.UserRepository;
+import com.menu.androidcourseproject.model.User;
 
 public class LoginViewModel extends AndroidViewModel {
+    private UserRepository userRepository;
+
     public LoginViewModel(@NonNull Application application) {
         super(application);
+        userRepository = new UserRepository(application);
     }
-    // TODO: Implement the ViewModel
+
+    public LiveData<User> login(String username, String password) {
+        return userRepository.login(username, password);
+    }
+
+
 }

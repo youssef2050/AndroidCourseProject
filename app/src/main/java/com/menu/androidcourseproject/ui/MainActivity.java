@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.menu.androidcourseproject.R;
@@ -30,15 +29,15 @@ public class MainActivity extends AppCompatActivity {
                 .findFragmentById(R.id.nav_host_fragment);
         NavController navCo = navHostFragment.getNavController();
         final User user = new User("youssef",
-                "youssef@tests.com",
-                "youssf2080",
+                "youssef@test.com",
+                "yousf2050",
                 "12345679",
                 "ps",
                 "18/8/1998",
                 "0592280825",
                 true,
                 true,
-                "https://www.picsum.photos/id/244/200");
+                "https://www.picsum.photos/id/244/200", true);
         RegisterViewModel registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
         if (user.isOk()) {
             System.out.println("is ok");
