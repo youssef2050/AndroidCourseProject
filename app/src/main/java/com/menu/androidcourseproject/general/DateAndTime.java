@@ -1,4 +1,4 @@
-package com.menu.androidcourseproject.ui.register;
+package com.menu.androidcourseproject.general;
 
 import android.app.DatePickerDialog;
 import android.content.Context;

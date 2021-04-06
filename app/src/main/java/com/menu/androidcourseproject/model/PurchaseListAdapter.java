@@ -6,13 +6,15 @@ public class PurchaseListAdapter {
     private String mealTitle;
     private int numberMeal;
     private double prise;
+    private String fullName;
 
-    public PurchaseListAdapter(int id, String date, String mealTitle, int numberMeal, double prise) {
+    public PurchaseListAdapter(int id, String date, String mealTitle, int numberMeal, double prise, String fullName) {
         this.id = id;
         this.date = date;
         this.mealTitle = mealTitle;
         this.numberMeal = numberMeal;
         this.prise = prise;
+        this.fullName = fullName;
     }
 
     public int getId() {
@@ -53,5 +55,13 @@ public class PurchaseListAdapter {
 
     public void setPrise(double prise) {
         this.prise = prise;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 }

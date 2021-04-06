@@ -4,18 +4,21 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 
-@Entity(primaryKeys = {"mealId", "date", "numberMeal", "timeInMillis"})
+@Entity(primaryKeys = {"mealId", "userId", "date", "numberMeal", "timeInMillis"})
 public class Purchase {
 
     @ForeignKey(entity = Meal.class, parentColumns = {"id"}, childColumns = {"mealId"})
     private int mealId;
+    @ForeignKey(entity = User.class, parentColumns = {"id"}, childColumns = {"userId"})
+    private int userId;
     @NonNull
     private String date;
     private int numberMeal;
     private long timeInMillis;
 
-    public Purchase(int mealId, @NonNull String date, int numberMeal, long timeInMillis) {
+    public Purchase(int mealId, int userId, @NonNull String date, int numberMeal, long timeInMillis) {
         this.mealId = mealId;
+        this.userId = userId;
         this.date = date;
         this.numberMeal = numberMeal;
         this.timeInMillis = timeInMillis;
@@ -52,5 +55,13 @@ public class Purchase {
 
     public void setTimeInMillis(long timeInMillis) {
         this.timeInMillis = timeInMillis;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

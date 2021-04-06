@@ -10,11 +10,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.menu.androidcourseproject.R;
+import com.menu.androidcourseproject.databinding.SettingsFragmentBinding;
 
 public class SettingsFragment extends Fragment {
 
     private SettingsViewModel mViewModel;
+    private SettingsFragmentBinding settingsFragmentBinding;
 
     public static SettingsFragment newInstance() {
         return new SettingsFragment();
@@ -23,14 +24,18 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.settings_fragment, container, false);
+        settingsFragmentBinding = SettingsFragmentBinding.inflate(getLayoutInflater());
+        return settingsFragmentBinding.getRoot();
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(SettingsViewModel.class);
-        // TODO: Use the ViewModel
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
 }

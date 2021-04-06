@@ -1,7 +1,5 @@
 package com.menu.androidcourseproject.ui.register;
 
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -25,25 +23,26 @@ import androidx.navigation.Navigation;
 
 import com.menu.androidcourseproject.R;
 import com.menu.androidcourseproject.databinding.RegisterFragmentBinding;
+import com.menu.androidcourseproject.general.AddImages;
+import com.menu.androidcourseproject.general.DateAndTime;
 import com.menu.androidcourseproject.model.User;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.app.Activity.RESULT_OK;
+import static com.menu.androidcourseproject.general.AddImages.requestCodeImage;
+import static com.menu.androidcourseproject.general.AddImages.requestCodePermission;
 
 public class RegisterFragment extends Fragment {
 
     private RegisterViewModel mViewModel;
     private RegisterFragmentBinding registerFragmentBinding;
-    public static final int requestCodeImage = 100;
-    public static final int requestCodePermission = 101;
+    private AddImages addImages;
+
     private String url = "";
     private Bitmap image;
 
@@ -67,6 +66,7 @@ public class RegisterFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
+        addImages = new AddImages(requireActivity());
     }
 
     @Override
@@ -82,18 +82,6 @@ public class RegisterFragment extends Fragment {
         });
     }
 
-    private void getPermission() {
-        if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(getContext(), READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED &&
-                    ContextCompat.checkSelfPermission(getContext(), WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(getActivity(), new String[]{READ_EXTERNAL_STORAGE,
-                                WRITE_EXTERNAL_STORAGE},
-                        requestCodePermission);
-            } else {
-                openGallery();
-            }
-        }
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -105,15 +93,12 @@ public class RegisterFragment extends Fragment {
         }
     }
 
-    private void openGallery() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-        if (intent.resolveActivity(getActivity().getPackageManager()) != null)
-            startActivityForResult(intent, requestCodeImage);
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        System.out.println("requestCode :" + requestCode);
+        System.out.println("resultCode : " + resultCode);
+        System.out.println("data : " + data);
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == requestCodeImage && data != null) {
             Uri uri = data.getData();
@@ -129,8 +114,8 @@ public class RegisterFragment extends Fragment {
         }
     }
 
+
     private void sinIn() {
-        System.out.println(getImage());
         final User user = new User(registerFragmentBinding.regFullName.getText().toString(),
                 registerFragmentBinding.regEmail.getText().toString(),
                 registerFragmentBinding.regUsername.getText().toString(),
@@ -147,9 +132,12 @@ public class RegisterFragment extends Fragment {
                 @Override
                 public void onChanged(User users) {
                     if (users == null) {
-                        saveImageInStorage(image, user.getUsername());
+                        addImages.saveImageInStorage(image, "profileImage", user.getUsername());
                         mViewModel.insert(user);
-                        Navigation.findNavController(getView()).navigate(R.id.loginFragment);
+                        Bundle bundle = new Bundle();
+                        bundle.putString(getString(R.string.username_key), user.getUsername());
+                        bundle.putString(getString(R.string.password_key), user.getPassword());
+                        Navigation.findNavController(getView()).navigate(R.id.loginFragment, bundle);
                     }
                 }
             });
@@ -169,23 +157,23 @@ public class RegisterFragment extends Fragment {
         return url;
     }
 
-    private void saveImageInStorage(Bitmap bitmap, String name) {
-        ContextWrapper cw = new ContextWrapper(getContext());
-        File directory = cw.getDir("profileImage", Context.MODE_PRIVATE);
-        File path = new File(directory, name + ".jpg");
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(path);
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+    private void getPermission() {
+        if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(requireActivity(), READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED &&
+                    ContextCompat.checkSelfPermission(requireActivity(), WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(requireActivity(), new String[]{READ_EXTERNAL_STORAGE,
+                                WRITE_EXTERNAL_STORAGE},
+                        requestCodePermission);
+            } else {
+                openGallery();
             }
         }
-        url = directory.getAbsolutePath() + "/" + name + ".jpg";
+    }
+
+    private void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        if (intent.resolveActivity(requireActivity().getPackageManager()) != null)
+            startActivityForResult(intent, requestCodeImage);
     }
 }

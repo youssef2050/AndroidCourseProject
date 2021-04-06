@@ -1,7 +1,9 @@
 package com.menu.androidcourseproject.model;
 
+import android.app.Activity;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import androidx.databinding.BindingAdapter;
@@ -9,7 +11,7 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import com.bumptech.glide.Glide;
+import com.menu.androidcourseproject.general.AddImages;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -28,6 +30,8 @@ public class Meal implements Parcelable {
     private boolean favorite;
     @Ignore
     public static List<Meal> MEALS;
+    @Ignore
+    public static Activity activity;
 
     public Meal(String mealTitle, String description, double prise, String URLImage, boolean cash, double rate, boolean favorite) {
         this.mealTitle = mealTitle;
@@ -125,9 +129,8 @@ public class Meal implements Parcelable {
 
     @BindingAdapter("android:loadImage")
     public static void loadImage(ImageView imageView, String imageUrl) {
-        Glide.with(imageView)
-                .load(imageUrl)
-                .into(imageView);
+
+        imageView.setImageBitmap(new AddImages(activity).loadImageFromStorage(imageUrl));
     }
 
     @Override
@@ -138,6 +141,26 @@ public class Meal implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
 
+    }
+
+    private boolean isEmptyName() {
+        return mealTitle != null & !TextUtils.isEmpty(mealTitle);
+    }
+
+    private boolean isEmptyPrise() {
+        return prise != 0;
+    }
+
+    private boolean isEmptyDescription() {
+        return description != null & !TextUtils.isEmpty(description);
+    }
+
+    private boolean isEmptyUrlImage() {
+        return URLImage != null & !TextUtils.isEmpty(URLImage);
+    }
+
+    public boolean isOK() {
+        return isEmptyName() && isEmptyPrise() && isEmptyDescription() && isEmptyUrlImage();
     }
 
 }

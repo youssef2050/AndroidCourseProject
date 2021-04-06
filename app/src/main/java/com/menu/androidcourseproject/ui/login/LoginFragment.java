@@ -56,21 +56,15 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (sharedPreferences.getInt(getString(R.string.login), 0) >= 1) {
-            transition(view, R.id.homeFragment);
+            transition(view, R.id.newItemFragment);
         }
-        loginFragmentBinding.butLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login(view);
-            }
-        });
+        if (getArguments() != null) {
+            loginFragmentBinding.loginUsername.setText(getArguments().getString(getString(R.string.username_key)));
+            loginFragmentBinding.loginPassword.setText(getArguments().getString(getString(R.string.password_key)));
+        }
+        loginFragmentBinding.butLogin.setOnClickListener(v -> login(view));
 
-        loginFragmentBinding.butSinup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                transition(view, R.id.registerFragment);
-            }
-        });
+        loginFragmentBinding.butSinup.setOnClickListener(v -> transition(view, R.id.registerFragment));
 
     }
 

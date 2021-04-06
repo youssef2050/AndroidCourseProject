@@ -3,4 +3,6 @@
     <string name="shared_key">keys</string>
     <string name="login">login_users</string>
     <string name="key_meal">meal</string>
+    <string name="password_key">password</string>
+    <string name="username_key">username</string>
 </resources>

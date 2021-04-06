@@ -79,6 +79,7 @@
                 android:drawableStart="@drawable/ic_baseline_email_24"
                 android:drawableLeft="@drawable/ic_baseline_email_24"
                 android:drawablePadding="10dp"
+                android:drawableTint="@color/black"
                 android:ems="10"
                 android:hint="email"
                 android:inputType="textEmailAddress"
@@ -87,7 +88,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/reg_full_name" />
+                app:layout_constraintTop_toBottomOf="@+id/reg_full_name"
+                tools:targetApi="m" />
 
             <LinearLayout
                 android:id="@+id/linearLayout2"
@@ -248,7 +250,8 @@
                     android:hint="BirthDate"
                     android:inputType="textPersonName"
                     android:textColor="#150f01"
-                    android:textColorHint="#150f01" />
+                    android:textColorHint="#150f01"
+                    tools:targetApi="m" />
             </LinearLayout>
 
             <CheckBox

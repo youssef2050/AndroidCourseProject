@@ -1,6 +1,8 @@
 package com.menu.androidcourseproject.ui.details;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,6 +23,9 @@ import com.menu.androidcourseproject.model.Meal;
 import com.menu.androidcourseproject.model.Purchase;
 
 import java.util.Calendar;
+import java.util.Objects;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class DetailsFragment extends Fragment {
 
@@ -86,8 +91,9 @@ public class DetailsFragment extends Fragment {
             Navigation.findNavController(getView()).navigate(R.id.purchaseListFragment);
         });
         detailsFragmentBinding.detailsSave.setOnClickListener(v -> {
+            @SuppressLint("UseRequireInsteadOfGet") SharedPreferences sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.shared_key), MODE_PRIVATE);
             System.out.println(getDate());
-            Purchase purchase = new Purchase(meal.getId(), getDate(), (int) number, Calendar.getInstance().getTimeInMillis());
+            Purchase purchase = new Purchase(meal.getId(), sharedPreferences.getInt(getString(R.string.login), 0), getDate(), (int) number, Calendar.getInstance().getTimeInMillis());
             mViewModel.insert(purchase);
             Navigation.findNavController(getView()).navigate(R.id.homeFragment);
             Toast.makeText(getContext(), "it's OK ", Toast.LENGTH_SHORT).show();

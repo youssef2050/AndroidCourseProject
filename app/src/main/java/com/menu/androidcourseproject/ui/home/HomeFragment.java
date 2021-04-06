@@ -1,7 +1,9 @@
 package com.menu.androidcourseproject.ui.home;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,20 +14,31 @@ import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.menu.androidcourseproject.R;
 import com.menu.androidcourseproject.adapters.MealAdapter;
 import com.menu.androidcourseproject.databinding.HomeFragmentBinding;
+import com.menu.androidcourseproject.general.AddImages;
 import com.menu.androidcourseproject.model.Meal;
+
+import java.util.List;
+
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static com.menu.androidcourseproject.general.AddImages.requestCodePermission;
 
 public class HomeFragment extends Fragment implements MealAdapter.onClickButtons {
 
     private HomeViewModel mViewModel;
     private HomeFragmentBinding homeFragmentBinding;
     private boolean isClick = true;
+    private AddImages addImages;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -41,8 +54,9 @@ public class HomeFragment extends Fragment implements MealAdapter.onClickButtons
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(getActivity()).get(HomeViewModel.class);
-//                insertMeals();
+        Meal.activity = requireActivity();
+        getPermission();
+        mViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
         MealAdapter mealAdapter = new MealAdapter(this);
         homeFragmentBinding.rvMeal.setHasFixedSize(true);
         homeFragmentBinding.rvMeal.setItemViewCacheSize(20);
@@ -96,23 +110,6 @@ public class HomeFragment extends Fragment implements MealAdapter.onClickButtons
         });
     }
 
-    private void insertMeals() {
-        Meal meal1 = new Meal("1", "1111", 5, "https://www.picsum.photos/id/238/200", true, 1.5, true);
-        Meal meal2 = new Meal("2", "2222", 10, "https://www.picsum.photos/id/239/200", false, 2.5, true);
-        Meal meal3 = new Meal("3", "3333", 2, "https://www.picsum.photos/id/240/200", false, 3.5, true);
-        Meal meal4 = new Meal("4", "4444", 3, "https://www.picsum.photos/id/241/200", true, 4.5, false);
-        Meal meal5 = new Meal("5", "5555", 8, "https://www.picsum.photos/id/242/200", false, 5, true);
-        Meal meal6 = new Meal("6", "6666", 6, "https://www.picsum.photos/id/243/200", true, 4.6, false);
-        Meal meal7 = new Meal("7", "7777", 7, "https://www.picsum.photos/id/244/200", true, 3.7, true);
-        mViewModel.insert(meal1);
-        mViewModel.insert(meal2);
-        mViewModel.insert(meal3);
-        mViewModel.insert(meal4);
-        mViewModel.insert(meal5);
-        mViewModel.insert(meal6);
-        mViewModel.insert(meal7);
-    }
-
     @Override
     public void share(Meal meal) {
         String text = meal.getMealTitle();
@@ -137,5 +134,16 @@ public class HomeFragment extends Fragment implements MealAdapter.onClickButtons
         Bundle bundle = new Bundle();
         bundle.putParcelable(getString(R.string.key_meal), meal);
         Navigation.findNavController(getView()).navigate(R.id.detailsFragment, bundle);
+    }
+
+    private void getPermission() {
+        if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(requireActivity(), READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED &&
+                    ContextCompat.checkSelfPermission(requireActivity(), WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(requireActivity(), new String[]{READ_EXTERNAL_STORAGE,
+                                WRITE_EXTERNAL_STORAGE},
+                        requestCodePermission);
+            }
+        }
     }
 }

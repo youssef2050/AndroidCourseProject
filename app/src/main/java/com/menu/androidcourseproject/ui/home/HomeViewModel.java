@@ -33,4 +33,7 @@ public class HomeViewModel extends AndroidViewModel {
     }
 
 
+    public LiveData<List<Meal>> getMeals() {
+        return meals;
+    }
 }
