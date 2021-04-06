@@ -41,34 +41,11 @@ public class HomeFragment extends Fragment implements MealAdapter.onClickButtons
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         mViewModel = new ViewModelProvider(getActivity()).get(HomeViewModel.class);
-//        Meal meal1 = new Meal("1", "1111", 150, "https://www.picsum.photos/id/238/200", true, 1.5, true);
-//        Meal meal2 = new Meal("2", "2222", 250, "https://www.picsum.photos/id/239/200", false, 2.5, true);
-//        Meal meal3 = new Meal("3", "3333", 350, "https://www.picsum.photos/id/240/200", false, 3.5, true);
-//        Meal meal4 = new Meal("4", "4444", 450, "https://www.picsum.photos/id/241/200", true, 4.5, false);
-//        Meal meal5 = new Meal("5", "5555", 550, "https://www.picsum.photos/id/242/200", false, 5, true);
-//        Meal meal6 = new Meal("6", "6666", 650, "https://www.picsum.photos/id/243/200", true, 4.6, false);
-//        Meal meal7 = new Meal("7", "7777", 750, "https://www.picsum.photos/id/244/200", true, 3.7, true);
-//        mViewModel.insert(meal1);
-//        mViewModel.insert(meal2);
-//        mViewModel.insert(meal3);
-//        mViewModel.insert(meal4);
-//        mViewModel.insert(meal5);
-//        mViewModel.insert(meal6);
-//        mViewModel.insert(meal7);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+//                insertMeals();
         MealAdapter mealAdapter = new MealAdapter(this);
         homeFragmentBinding.rvMeal.setHasFixedSize(true);
-        homeFragmentBinding.rvMeal.setItemViewCacheSize(15);
+        homeFragmentBinding.rvMeal.setItemViewCacheSize(20);
         homeFragmentBinding.rvMeal.setAdapter(mealAdapter);
         mViewModel.meals.observe(getViewLifecycleOwner(), meals -> {
             if (meals != null) {
@@ -119,6 +96,23 @@ public class HomeFragment extends Fragment implements MealAdapter.onClickButtons
         });
     }
 
+    private void insertMeals() {
+        Meal meal1 = new Meal("1", "1111", 5, "https://www.picsum.photos/id/238/200", true, 1.5, true);
+        Meal meal2 = new Meal("2", "2222", 10, "https://www.picsum.photos/id/239/200", false, 2.5, true);
+        Meal meal3 = new Meal("3", "3333", 2, "https://www.picsum.photos/id/240/200", false, 3.5, true);
+        Meal meal4 = new Meal("4", "4444", 3, "https://www.picsum.photos/id/241/200", true, 4.5, false);
+        Meal meal5 = new Meal("5", "5555", 8, "https://www.picsum.photos/id/242/200", false, 5, true);
+        Meal meal6 = new Meal("6", "6666", 6, "https://www.picsum.photos/id/243/200", true, 4.6, false);
+        Meal meal7 = new Meal("7", "7777", 7, "https://www.picsum.photos/id/244/200", true, 3.7, true);
+        mViewModel.insert(meal1);
+        mViewModel.insert(meal2);
+        mViewModel.insert(meal3);
+        mViewModel.insert(meal4);
+        mViewModel.insert(meal5);
+        mViewModel.insert(meal6);
+        mViewModel.insert(meal7);
+    }
+
     @Override
     public void share(Meal meal) {
         String text = meal.getMealTitle();
@@ -140,6 +134,8 @@ public class HomeFragment extends Fragment implements MealAdapter.onClickButtons
 
     @Override
     public void details(Meal meal) {
-        Navigation.findNavController(getActivity(), R.id.detailsFragment);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(getString(R.string.key_meal), meal);
+        Navigation.findNavController(getView()).navigate(R.id.detailsFragment, bundle);
     }
 }

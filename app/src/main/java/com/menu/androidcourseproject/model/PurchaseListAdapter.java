@@ -4,12 +4,14 @@ public class PurchaseListAdapter {
     private int id;
     private String date;
     private String mealTitle;
+    private int numberMeal;
     private double prise;
 
-    public PurchaseListAdapter(int id, String date, String mealTitle, double prise) {
+    public PurchaseListAdapter(int id, String date, String mealTitle, int numberMeal, double prise) {
         this.id = id;
         this.date = date;
         this.mealTitle = mealTitle;
+        this.numberMeal = numberMeal;
         this.prise = prise;
     }
 
@@ -35,6 +37,14 @@ public class PurchaseListAdapter {
 
     public void setMealTitle(String mealTitle) {
         this.mealTitle = mealTitle;
+    }
+
+    public int getNumberMeal() {
+        return numberMeal;
+    }
+
+    public void setNumberMeal(int numberMeal) {
+        this.numberMeal = numberMeal;
     }
 
     public double getPrise() {

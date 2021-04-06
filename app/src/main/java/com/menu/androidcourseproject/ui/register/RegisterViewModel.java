@@ -32,4 +32,8 @@ public class RegisterViewModel extends AndroidViewModel {
     public LiveData<List<User>> getAllUser() {
         return allUser;
     }
+
+    public LiveData<User> login(String username, String password) {
+    return userRepository.login(username, password);
+    }
 }

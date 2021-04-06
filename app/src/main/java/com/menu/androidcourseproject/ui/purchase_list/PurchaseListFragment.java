@@ -10,11 +10,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.menu.androidcourseproject.R;
+import com.menu.androidcourseproject.adapters.PurchaseAdapter;
+import com.menu.androidcourseproject.databinding.PurchaseListFragmentBinding;
 
 public class PurchaseListFragment extends Fragment {
 
     private PurchaseListViewModel mViewModel;
+    private PurchaseListFragmentBinding purchaseListFragmentBinding;
+    private PurchaseAdapter purchaseAdapter;
 
     public static PurchaseListFragment newInstance() {
         return new PurchaseListFragment();
@@ -23,14 +26,26 @@ public class PurchaseListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.purchase_list_fragment, container, false);
+        purchaseListFragmentBinding = PurchaseListFragmentBinding.inflate(getLayoutInflater());
+        return purchaseListFragmentBinding.getRoot();
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(PurchaseListViewModel.class);
-        // TODO: Use the ViewModel
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        purchaseAdapter = new PurchaseAdapter();
+        purchaseListFragmentBinding.purchaseRecyclerView.setItemViewCacheSize(20);
+        purchaseListFragmentBinding.purchaseRecyclerView.setHasFixedSize(true);
+        purchaseListFragmentBinding.purchaseRecyclerView.setAdapter(purchaseAdapter);
+        mViewModel.getPurchaseListAdapterLiveData().observe(getViewLifecycleOwner(), purchaseListAdapters -> {
+            purchaseAdapter.setPurchaseList(purchaseListAdapters);
+        });
+
+    }
 }

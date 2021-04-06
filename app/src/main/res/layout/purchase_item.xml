@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="purchase"
+            type="com.menu.androidcourseproject.model.PurchaseListAdapter" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/purchase_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/price_background"
+            android:gravity="center"
+            android:text="@{String.valueOf(purchase.prise*purchase.numberMeal),default =`50`}"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="@{purchase.mealTitle,default=`yousse ezzeldeen`}"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/purchase_price"
+            app:layout_constraintStart_toEndOf="@+id/purchase_price"
+            app:layout_constraintTop_toTopOf="@+id/purchase_price"
+            app:layout_constraintVertical_bias="0.259" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="@{purchase.date,default=`5/4/2021- 1:12`}"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/purchase_price"
+            app:layout_constraintStart_toEndOf="@+id/purchase_price"
+            app:layout_constraintTop_toTopOf="@+id/purchase_price"
+            app:layout_constraintVertical_bias="0.827" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

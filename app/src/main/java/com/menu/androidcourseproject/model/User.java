@@ -4,7 +4,11 @@ import android.text.TextUtils;
 import android.util.Patterns;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 public class User {
@@ -21,6 +25,8 @@ public class User {
     private boolean Male;
     private String URLImage;
     private boolean verified;
+    @Ignore
+    private Map<String, Boolean> errors;
 
 
     public User(String fullName, String email, String username, String password, String country, String birthDate, String phone, boolean administrator, boolean male, String URLImage, boolean verified) {
@@ -35,6 +41,7 @@ public class User {
         Male = male;
         this.URLImage = URLImage;
         this.verified = verified;
+        errors = new HashMap<>();
     }
 
     public User() {
@@ -92,20 +99,6 @@ public class User {
         return verified;
     }
 
-    private boolean isValidEmail() {
-        System.out.println("is email");
-        return email != null && !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    }
-
-    public boolean isValidPassword() {
-        System.out.println("is password");
-        return password != null && !TextUtils.isEmpty(password) && password.length() >= 8;
-    }
-
-    private boolean isValidPhone() {
-        System.out.println("is phone");
-        return phone != null && !TextUtils.isEmpty(phone) && Patterns.PHONE.matcher(phone).matches();
-    }
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
@@ -151,8 +144,42 @@ public class User {
         this.verified = verified;
     }
 
+    private boolean isValidEmail() {
+        errors.put("email", email != null && !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
+        return email != null && !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    public boolean isValidPassword() {
+        errors.put("password", password != null && !TextUtils.isEmpty(password) && password.length() >= 8);
+        return password != null && !TextUtils.isEmpty(password) && password.length() >= 8;
+    }
+
+    private boolean isValidPhone() {
+        errors.put("phone", phone != null && !TextUtils.isEmpty(phone) && Patterns.PHONE.matcher(phone).matches());
+        return phone != null && !TextUtils.isEmpty(phone) && Patterns.PHONE.matcher(phone).matches();
+    }
+
+    private boolean isEmptyUsername() {
+        errors.put("username", username != null && !TextUtils.isEmpty(username));
+        return username != null && !TextUtils.isEmpty(username);
+    }
+
+    private boolean isEmptyBirthDate() {
+        errors.put("birthDate", birthDate != null && !TextUtils.isEmpty(birthDate));
+        return birthDate != null && !TextUtils.isEmpty(birthDate);
+    }
+
+    private boolean isEmptyFullName() {
+        errors.put("FullName", fullName != null && !TextUtils.isEmpty(fullName));
+        return fullName != null && !TextUtils.isEmpty(fullName);
+    }
+
     public boolean isOk() {
-        System.out.println(String.valueOf(isValidEmail()) + " " + isValidPassword() + " " + isValidPhone());
-        return isValidEmail() && isValidPassword() && isValidPhone();
+        return isEmptyFullName() && isValidEmail() && isEmptyUsername() && isValidPassword() && isValidPhone()
+                && isEmptyBirthDate();
+    }
+
+    public Map<String, Boolean> getErrors() {
+        return errors;
     }
 }

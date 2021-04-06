@@ -1,5 +1,7 @@
 package com.menu.androidcourseproject.ui.login;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -22,6 +24,8 @@ public class LoginFragment extends Fragment {
 
     private LoginViewModel mViewModel;
     private LoginFragmentBinding loginFragmentBinding;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     public static LoginFragment newInstance() {
         return new LoginFragment();
@@ -44,35 +48,59 @@ public class LoginFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        sharedPreferences = getActivity().getSharedPreferences(getString(R.string.shared_key), Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (sharedPreferences.getInt(getString(R.string.login), 0) >= 1) {
+            transition(view, R.id.homeFragment);
+        }
         loginFragmentBinding.butLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = loginFragmentBinding.edUsermane.getText().toString();
-                String password = loginFragmentBinding.edPassword.getText().toString();
-                if (TextUtils.isEmpty(username)) {
-                    Toast.makeText(getContext(), "username is empty", Toast.LENGTH_SHORT).show();
-                } else if (!isValidPassword(password)) {
-                    Toast.makeText(getContext(), "password is not valid", Toast.LENGTH_SHORT).show();
-                } else {
-                    mViewModel.login(username, password).observe(getViewLifecycleOwner(), new Observer<User>() {
-                        @Override
-                        public void onChanged(User user) {
-                            if (user != null) {
-                                Navigation.findNavController(view).navigate(R.id.homeFragment);
-                            } else {
-                                Toast.makeText(getContext(), "error in username or password", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                }
+                login(view);
             }
         });
 
+        loginFragmentBinding.butSinup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                transition(view, R.id.registerFragment);
+            }
+        });
+
+    }
+
+    private void transition(@NonNull View view, int FragmentId) {
+        Navigation.findNavController(view).navigate(FragmentId);
+    }
+
+    private void login(@NonNull View view) {
+        String username = loginFragmentBinding.loginUsername.getText().toString();
+        String password = loginFragmentBinding.loginPassword.getText().toString();
+        if (TextUtils.isEmpty(username)) {
+            Toast.makeText(getContext(), "username is empty", Toast.LENGTH_SHORT).show();
+        } else if (!isValidPassword(password)) {
+            Toast.makeText(getContext(), "password is not valid", Toast.LENGTH_SHORT).show();
+        } else {
+            mViewModel.login(username, password).observe(getViewLifecycleOwner(), new Observer<User>() {
+                @Override
+                public void onChanged(User user) {
+                    if (user != null) {
+                        transition(view, R.id.homeFragment);
+                        if (loginFragmentBinding.rememberMe.isChecked()) {
+                            editor.putInt(getString(R.string.login), user.getId());
+                            editor.apply();
+                        }
+                    } else {
+                        Toast.makeText(getContext(), "error in username or password", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
     }
 
     public boolean isValidPassword(String password) {

@@ -1,9 +1,12 @@
 package com.menu.androidcourseproject.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.ImageView;
 
 import androidx.databinding.BindingAdapter;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.bumptech.glide.Glide;
@@ -13,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 @Entity
-public class Meal {
+public class Meal implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String mealTitle;
@@ -23,6 +26,7 @@ public class Meal {
     private boolean Cash;
     private double rate;
     private boolean favorite;
+    @Ignore
     public static List<Meal> MEALS;
 
     public Meal(String mealTitle, String description, double prise, String URLImage, boolean cash, double rate, boolean favorite) {
@@ -38,15 +42,6 @@ public class Meal {
     public Meal() {
     }
 
-    public Meal(int id, String mealTitle, String description, double prise, String URLImage, boolean cash, double rate) {
-        this.id = id;
-        this.mealTitle = mealTitle;
-        this.description = description;
-        this.prise = prise;
-        this.URLImage = URLImage;
-        Cash = cash;
-        this.rate = rate;
-    }
 
     public int getId() {
         return id;
@@ -112,6 +107,7 @@ public class Meal {
         this.favorite = favorite;
     }
 
+
     @NotNull
     @Override
     public String toString() {
@@ -133,4 +129,15 @@ public class Meal {
                 .load(imageUrl)
                 .into(imageView);
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+    }
+
 }

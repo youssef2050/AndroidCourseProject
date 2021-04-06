@@ -42,4 +42,8 @@ public class PurchaseRepository {
                 .subscribe(() -> Log.d(TAG, "insert: "),
                         throwable -> Log.e(TAG, "insert: error", throwable));
     }
+
+    public LiveData<List<PurchaseListAdapter>> getAllPurchases() {
+        return allPurchases;
+    }
 }
