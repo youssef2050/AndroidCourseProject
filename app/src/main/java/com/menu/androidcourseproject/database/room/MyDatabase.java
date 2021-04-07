@@ -13,7 +13,7 @@ import com.menu.androidcourseproject.model.Meal;
 import com.menu.androidcourseproject.model.Purchase;
 import com.menu.androidcourseproject.model.User;
 
-@Database(entities = {User.class, Meal.class, Purchase.class}, version = 2, exportSchema = false)
+@Database(entities = {User.class, Meal.class, Purchase.class}, version = 1, exportSchema = false)
 public abstract class MyDatabase extends RoomDatabase {
     public static final String DATABASE_NAME = "project_database.db";
     private static MyDatabase instance;

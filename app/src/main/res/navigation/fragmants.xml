@@ -69,5 +69,14 @@
         android:id="@+id/profileFragment"
         android:name="com.menu.androidcourseproject.ui.profile.ProfileFragment"
         android:label="profile_fragment"
-        tools:layout="@layout/profile_fragment" />
+        tools:layout="@layout/profile_fragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_verifiedFragment"
+            app:destination="@id/verifiedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/verifiedFragment"
+        android:name="com.menu.androidcourseproject.ui.verified.VerifiedFragment"
+        android:label="verified_fragment"
+        tools:layout="@layout/verified_fragment" />
 </navigation>

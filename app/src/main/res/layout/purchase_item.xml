@@ -11,8 +11,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:padding="10dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/edit_text_description_background"
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/purchase_price"
@@ -22,6 +24,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/price_background"
+            android:elevation="5dp"
             android:gravity="center"
             android:text="@{String.valueOf(purchase.prise*purchase.numberMeal),default =`50`}"
             android:textSize="30sp"
@@ -34,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
+            android:elevation="5dp"
             android:text="@{purchase.mealTitle,default=`yousse ezzeldeen`}"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="@+id/purchase_price"
@@ -47,6 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
+            android:elevation="5dp"
             android:text="@{purchase.date,default=`5/4/2021- 1:12`}"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="@+id/purchase_price"

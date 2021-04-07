@@ -50,44 +50,25 @@ public class LoginFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         sharedPreferences = getActivity().getSharedPreferences(getString(R.string.shared_key), Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        User user = new User(
-                "youssef ezzeldee",
-                "yousf2050@hotmail.com",
-                "yousf2050",
-                "12345679",
-                "ps",
-                "18//8/1998",
-                "970",
-                "0592280825",
-                true,
-                false,
-                "/data/0/com.menu.androidcourseproject/app_profileImage/test2021.jpg",
-                true
-        );
-        user.setId(1);
-        mViewModel.update(user);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (sharedPreferences.getInt(getString(R.string.login), 0) >= 1) {
-            transition(view, R.id.settingsFragment);
+            transition(view, R.id.homeFragment);
         }
         if (getArguments() != null) {
             loginFragmentBinding.loginUsername.setText(getArguments().getString(getString(R.string.username_key)));
             loginFragmentBinding.loginPassword.setText(getArguments().getString(getString(R.string.password_key)));
         }
         loginFragmentBinding.butLogin.setOnClickListener(v -> login(view));
-
         loginFragmentBinding.butSinup.setOnClickListener(v -> transition(view, R.id.registerFragment));
-
     }
 
     private void transition(@NonNull View view, int FragmentId) {
         Navigation.findNavController(view).navigate(FragmentId);
     }
-
     private void login(@NonNull View view) {
         String username = loginFragmentBinding.loginUsername.getText().toString();
         String password = loginFragmentBinding.loginPassword.getText().toString();

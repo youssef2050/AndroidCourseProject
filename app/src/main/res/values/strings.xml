@@ -6,4 +6,5 @@
     <string name="password_key">password</string>
     <string name="username_key">username</string>
     <string name="url_default">url</string>
+    <string name="resend_code">Resend code</string>
 </resources>

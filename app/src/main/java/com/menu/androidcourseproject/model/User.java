@@ -12,7 +12,6 @@ import androidx.room.PrimaryKey;
 
 import com.hbb20.CountryCodePicker;
 import com.menu.androidcourseproject.R;
-import com.menu.androidcourseproject.general.AddImages;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -200,10 +199,10 @@ public class User {
         return errors;
     }
 
-    @BindingAdapter("android:loadImage")
-    public static void loadImage(ImageView imageView, String imageUrl) {
-        imageView.setImageBitmap(new AddImages(Meal.activity).loadImageFromStorage(imageUrl));
-    }
+//    @BindingAdapter("android:loadImage")
+//    public static void loadImage(ImageView imageView, String imageUrl) {
+//        imageView.setImageBitmap(new AddImages(Meal.activity).loadImageFromStorage(imageUrl));
+//    }
 
     @BindingAdapter("android:visibilityVerified")
     public static void visibility(View view, boolean verified) {

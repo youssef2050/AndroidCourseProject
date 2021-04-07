@@ -16,7 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
             <EditText
                 android:id="@+id/reg_full_name"
                 android:layout_width="0dp"
@@ -30,6 +29,7 @@
                 android:drawableStart="@drawable/ic_name"
                 android:drawableLeft="@drawable/ic_name"
                 android:drawablePadding="10dp"
+                android:elevation="5dp"
                 android:ems="10"
                 android:hint="Full name"
                 android:inputType="textPersonName"
@@ -53,6 +53,7 @@
                 android:drawableStart="@drawable/ic_name"
                 android:drawableLeft="@drawable/ic_name"
                 android:drawablePadding="10dp"
+                android:elevation="5dp"
                 android:ems="10"
                 android:hint="username"
                 android:inputType="textPersonName"
@@ -77,6 +78,7 @@
                 android:drawableLeft="@drawable/ic_baseline_email_24"
                 android:drawablePadding="10dp"
                 android:drawableTint="@color/black"
+                android:elevation="5dp"
                 android:ems="10"
                 android:hint="email"
                 android:inputType="textEmailAddress"
@@ -97,6 +99,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
+                android:elevation="5dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -111,6 +114,7 @@
                     android:drawableStart="@drawable/ic_password"
                     android:drawableLeft="@drawable/ic_password"
                     android:drawablePadding="10dp"
+                    android:elevation="5dp"
                     android:ems="10"
                     android:hint="password"
                     android:inputType="textPassword"
@@ -126,6 +130,7 @@
                     android:drawableStart="@drawable/ic_password"
                     android:drawableLeft="@drawable/ic_password"
                     android:drawablePadding="10dp"
+                    android:elevation="5dp"
                     android:ems="10"
                     android:hint="Re password"
                     android:inputType="textPassword"
@@ -139,9 +144,12 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/sinup_button_background"
+                android:elevation="5dp"
                 android:text="sin in"
                 android:textColor="#150f01"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/reg_gender" />
@@ -181,6 +189,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
+                android:elevation="5dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -192,6 +201,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:background="@drawable/edit_text_background"
+                    android:elevation="5dp"
                     android:padding="7dp"
                     app:ccp_defaultPhoneCode="970" />
 
@@ -204,6 +214,7 @@
                     android:drawableStart="@drawable/ic_phone"
                     android:drawableLeft="@drawable/ic_phone"
                     android:drawablePadding="10dp"
+                    android:elevation="5dp"
                     android:ems="10"
                     android:hint="phone"
                     android:inputType="phone"
@@ -220,6 +231,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
+                android:elevation="5dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -231,6 +243,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_background"
+                    android:elevation="5dp"
                     android:src="@drawable/ic_calendar_today" />
 
                 <EditText
@@ -242,6 +255,8 @@
                     android:drawableStart="@drawable/ic_cake"
                     android:drawableLeft="@drawable/ic_cake"
                     android:drawablePadding="10dp"
+
+                    android:elevation="5dp"
                     android:ems="10"
                     android:enabled="false"
                     android:hint="BirthDate"

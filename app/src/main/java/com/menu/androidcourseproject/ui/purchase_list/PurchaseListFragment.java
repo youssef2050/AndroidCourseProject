@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.menu.androidcourseproject.R;
 import com.menu.androidcourseproject.adapters.PurchaseAdapter;
@@ -52,6 +54,13 @@ public class PurchaseListFragment extends Fragment {
                 .observe(getViewLifecycleOwner(), purchaseListAdapters -> {
                     purchaseAdapter.setPurchaseList(purchaseListAdapters);
                 });
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Navigation.findNavController(requireView()).navigate(R.id.settingsFragment);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(requireActivity(), callback);
 
     }
 }

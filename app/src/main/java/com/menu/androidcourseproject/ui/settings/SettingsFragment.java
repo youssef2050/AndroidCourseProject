@@ -2,10 +2,10 @@ package com.menu.androidcourseproject.ui.settings;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,7 +77,8 @@ public class SettingsFragment extends Fragment {
                 final TextView mealTitle = new TextView(requireContext());
                 final TextView date = new TextView(requireContext());
                 price.setBackground(requireActivity().getResources().getDrawable(R.drawable.price_background));
-                price.setText(String.valueOf(purchaseListAdapterMax.getPrise()));
+                price.setGravity(Gravity.CENTER);
+                price.setText(String.valueOf(purchaseListAdapterMax.getPrise() * purchaseListAdapterMax.getNumberMeal()));
                 mealTitle.setText(purchaseListAdapterMax.getMealTitle());
                 date.setText(purchaseListAdapterMax.getDate());
                 LinearLayout layout = new LinearLayout(requireContext());
@@ -117,18 +118,12 @@ public class SettingsFragment extends Fragment {
         alertDialog.setView(ll);
 
         alertDialog.setPositiveButton("Yes",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        mViewModel.update(newPass.getText().toString().equals(confirmPass.getText().toString()) ? newPass.getText().toString() : "", sharedPreferences.getInt(getString(R.string.login), 0));
-                        dialog.cancel();
-                    }
+                (dialog, id) -> {
+                    mViewModel.update(newPass.getText().toString().equals(confirmPass.getText().toString()) ? newPass.getText().toString() : "", sharedPreferences.getInt(getString(R.string.login), 0));
+                    dialog.cancel();
                 });
         alertDialog.setNegativeButton("No",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
+                (dialog, id) -> dialog.cancel());
 
         AlertDialog alert11 = alertDialog.create();
         alert11.show();

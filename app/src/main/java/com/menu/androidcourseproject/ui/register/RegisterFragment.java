@@ -42,7 +42,6 @@ public class RegisterFragment extends Fragment {
     private RegisterViewModel mViewModel;
     private RegisterFragmentBinding registerFragmentBinding;
     private AddImages addImages;
-
     private String url = "";
     private Bitmap image;
 

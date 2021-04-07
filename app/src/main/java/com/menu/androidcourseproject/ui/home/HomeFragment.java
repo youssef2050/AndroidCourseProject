@@ -10,14 +10,13 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioGroup;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
@@ -26,8 +25,6 @@ import com.menu.androidcourseproject.adapters.MealAdapter;
 import com.menu.androidcourseproject.databinding.HomeFragmentBinding;
 import com.menu.androidcourseproject.general.AddImages;
 import com.menu.androidcourseproject.model.Meal;
-
-import java.util.List;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -58,7 +55,6 @@ public class HomeFragment extends Fragment implements MealAdapter.onClickButtons
         getPermission();
         mViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
         MealAdapter mealAdapter = new MealAdapter(this);
-        homeFragmentBinding.rvMeal.setHasFixedSize(true);
         homeFragmentBinding.rvMeal.setItemViewCacheSize(20);
         homeFragmentBinding.rvMeal.setAdapter(mealAdapter);
         mViewModel.meals.observe(getViewLifecycleOwner(), meals -> {
@@ -82,33 +78,36 @@ public class HomeFragment extends Fragment implements MealAdapter.onClickButtons
 
             }
         });
-        homeFragmentBinding.butFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isClick) {
-                    homeFragmentBinding.list.setVisibility(View.VISIBLE);
-                    isClick = !isClick;
-                } else {
-                    homeFragmentBinding.cash.setChecked(false);
-                    homeFragmentBinding.installment.setChecked(false);
-                    mealAdapter.send("");
-                    homeFragmentBinding.list.setVisibility(View.GONE);
-                    isClick = !isClick;
-                }
-            }
-        });
-        homeFragmentBinding.rgList.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
+        homeFragmentBinding.butFilter.setOnClickListener(v -> {
+            if (isClick) {
+                homeFragmentBinding.list.setVisibility(View.VISIBLE);
+            } else {
+                homeFragmentBinding.cash.setChecked(false);
+                homeFragmentBinding.installment.setChecked(false);
                 mealAdapter.send("");
-                if (checkedId == homeFragmentBinding.cash.getId()) {
-                    mealAdapter.send(homeFragmentBinding.cash.getText());
-                } else if (checkedId == homeFragmentBinding.installment.getId()) {
-                    mealAdapter.send(homeFragmentBinding.installment.getText());
-                }
+                homeFragmentBinding.list.setVisibility(View.GONE);
+            }
+            isClick = !isClick;
+        });
+        homeFragmentBinding.rgList.setOnCheckedChangeListener((group, checkedId) -> {
+            mealAdapter.send("");
+            if (checkedId == homeFragmentBinding.cash.getId()) {
+                mealAdapter.send(homeFragmentBinding.cash.getText());
+            } else if (checkedId == homeFragmentBinding.installment.getId()) {
+                mealAdapter.send(homeFragmentBinding.installment.getText());
             }
         });
+        homeFragmentBinding.butSetting.setOnClickListener(v -> Navigation.findNavController(requireView()).navigate(R.id.settingsFragment));
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                requireActivity().finish();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(requireActivity(), callback);
+
     }
+
 
     @Override
     public void share(Meal meal) {
