@@ -152,7 +152,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:background="@drawable/edit_text_background"
-                    android:codePhone="@{user.codePhone}"
+                    android:codePhone="@{user.country}"
                     android:padding="7dp" />
 
                 <TextView

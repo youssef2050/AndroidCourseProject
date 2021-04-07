@@ -39,13 +39,12 @@ public class AddImages {
                 e.printStackTrace();
             }
         }
-        String globe = directory.getAbsolutePath();
         return path.getAbsolutePath();
     }
 
     public Bitmap loadImageFromStorage(String path) {
         System.out.println("path : " + path);
-        if (!path.equals("") && path != null) {
+        if (path != null && !path.equals("")) {
             try {
                 File f = new File(path);
                 return BitmapFactory.decodeStream(new FileInputStream(f));

@@ -50,6 +50,22 @@ public class LoginFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         sharedPreferences = getActivity().getSharedPreferences(getString(R.string.shared_key), Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
+        User user = new User(
+                "youssef ezzeldee",
+                "yousf2050@hotmail.com",
+                "yousf2050",
+                "12345679",
+                "ps",
+                "18//8/1998",
+                "970",
+                "0592280825",
+                true,
+                false,
+                "/data/0/com.menu.androidcourseproject/app_profileImage/test2021.jpg",
+                true
+        );
+        user.setId(1);
+        mViewModel.update(user);
     }
 
     @Override

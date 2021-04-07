@@ -45,6 +45,8 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mViewModel.getUser(1).observe(getViewLifecycleOwner(), user -> {
+            assert user != null;
+            System.out.println(user.getURLImage());
             profileFragmentBinding.setUser(user);
         });
     }

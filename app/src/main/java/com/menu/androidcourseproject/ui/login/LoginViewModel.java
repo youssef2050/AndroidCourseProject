@@ -5,7 +5,6 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import com.menu.androidcourseproject.database.room.repository.UserRepository;
 import com.menu.androidcourseproject.model.User;
@@ -22,5 +21,8 @@ public class LoginViewModel extends AndroidViewModel {
         return userRepository.login(username, password);
     }
 
+    public void update(User user) {
+        userRepository.update(user);
+    }
 
 }
