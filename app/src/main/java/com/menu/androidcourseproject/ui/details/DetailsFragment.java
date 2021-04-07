@@ -69,7 +69,7 @@ public class DetailsFragment extends Fragment {
         detailsFragmentBinding.setMeal(meal);
         detailsFragmentBinding.detailsnumber.setText(number + "");
         double price = meal.getPrise();
-        detailsFragmentBinding.detailsSum.setText(price + "");
+        detailsFragmentBinding.detailsSum.setText("Total bill :" + price + "");
         detailsFragmentBinding.incNumber.setOnClickListener(v -> {
             detailsFragmentBinding.detailsnumber.setText(++number + "");
             detailsFragmentBinding.detailsSum.setText("Total bill :" + (number * price) + "");
@@ -77,7 +77,7 @@ public class DetailsFragment extends Fragment {
         detailsFragmentBinding.decNumber.setOnClickListener(v -> {
             if (number > 1) {
                 detailsFragmentBinding.detailsnumber.setText(--number + "");
-                detailsFragmentBinding.detailsSum.setText((number * price) + "");
+                detailsFragmentBinding.detailsSum.setText("Total bill :" + (number * price) + "");
             }
         });
         detailsFragmentBinding.detailsFav.setOnClickListener(v -> {

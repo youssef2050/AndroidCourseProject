@@ -25,14 +25,50 @@
             android:layout_height="match_parent">
 
 
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="250dp"
+                android:layout_height="0dp"
+                android:src="@drawable/layout_background"
+                app:layout_constraintBottom_toTopOf="@+id/guideline7"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="250dp"
+                android:layout_height="0dp"
+                android:src="@drawable/layout2_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline15" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.33" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.68" />
+
             <com.joooonho.SelectableRoundedImageView
                 android:id="@+id/selectableRoundedImageView"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
+                android:elevation="5dp"
                 android:loadImage="@{meal.URLImage}"
                 android:scaleType="fitXY"
                 android:src="@drawable/beef"
-                android:elevation="5dp"
                 app:sriv_left_bottom_corner_radius="50dp"
                 app:sriv_right_bottom_corner_radius="50dp"
                 tools:ignore="MissingConstraints" />
@@ -42,11 +78,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:elevation="5dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/button_background"
+                android:elevation="5dp"
                 app:icon="@drawable/ic_add"
                 app:iconGravity="textStart"
                 app:iconPadding="0dp"
@@ -60,10 +96,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                android:elevation="5dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/button_left_background"
+                android:elevation="5dp"
                 app:icon="@{meal.favorite ? @drawable/ic_favorite:@drawable/ic_favorite_border,default = @drawable/ic_favorite}"
                 app:iconGravity="textStart"
                 app:iconPadding="0dp"
@@ -96,8 +132,8 @@
                 android:layout_width="250sp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:gravity="center"
                 android:elevation="5dp"
+                android:gravity="center"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -107,8 +143,8 @@
                     android:id="@+id/inc_number"
                     android:layout_width="53dp"
                     android:layout_height="wrap_content"
-                    android:text="+"
                     android:elevation="5dp"
+                    android:text="+"
                     android:textSize="30sp"
                     app:iconGravity="textStart"
                     app:iconPadding="0dp" />
@@ -120,16 +156,16 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginEnd="10dp"
-                    android:elevation="5dp"
                     android:layout_marginRight="10dp"
+                    android:elevation="5dp"
                     android:textSize="30sp" />
 
                 <Button
                     android:id="@+id/dec_number"
                     android:layout_width="53dp"
                     android:layout_height="wrap_content"
-                    android:text="-"
                     android:elevation="5dp"
+                    android:text="-"
                     android:textSize="30sp"
                     app:iconGravity="textStart"
                     app:iconPadding="0dp" />
@@ -143,9 +179,8 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:elevation="5dp"
                 android:layout_marginRight="8dp"
-                android:background="@drawable/edit_text_description_background"
+                android:elevation="5dp"
                 android:text="@{meal.description}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

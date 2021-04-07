@@ -56,6 +56,8 @@ public class ProfileFragment extends Fragment {
                         Context.MODE_PRIVATE).getInt(getString(R.string.login), 0))
                 .observe(getViewLifecycleOwner(), user -> {
                     assert user != null;
+                    System.out.println(user.getCountry());
+                    System.out.println(user.getURLImage());
                     profileFragmentBinding.setUser(user);
                     if (!user.isVerified()) {
                         snackbar = Snackbar.make(getView(), "verified my account", BaseTransientBottomBar.LENGTH_INDEFINITE);

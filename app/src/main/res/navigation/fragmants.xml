@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/newItemFragment"
@@ -64,6 +67,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -78,5 +84,23 @@
         android:id="@+id/verifiedFragment"
         android:name="com.menu.androidcourseproject.ui.verified.VerifiedFragment"
         android:label="verified_fragment"
-        tools:layout="@layout/verified_fragment" />
+        tools:layout="@layout/verified_fragment" >
+        <action
+            android:id="@+id/action_verifiedFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.menu.androidcourseproject.ui.change_password.ChangePasswordFragment"
+        android:label="change_password_fragment"
+        tools:layout="@layout/change_password_fragment" />
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.menu.androidcourseproject.ui.forgot_password.ForgotPasswordFragment"
+        android:label="forgot_password_fragment"
+        tools:layout="@layout/forgot_password_fragment" >
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_verifiedFragment"
+            app:destination="@id/verifiedFragment" />
+    </fragment>
 </navigation>

@@ -1,4 +1,4 @@
-package com.menu.androidcourseproject.ui.verified;
+package com.menu.androidcourseproject.ui.forgot_password;
 
 import android.app.Application;
 
@@ -9,19 +9,15 @@ import androidx.lifecycle.LiveData;
 import com.menu.androidcourseproject.database.room.repository.UserRepository;
 import com.menu.androidcourseproject.model.User;
 
-public class VerifiedViewModel extends AndroidViewModel {
+public class ForgotPasswordViewModel extends AndroidViewModel {
     private UserRepository userRepository;
 
-    public VerifiedViewModel(@NonNull Application application) {
+    public ForgotPasswordViewModel(@NonNull Application application) {
         super(application);
         userRepository = new UserRepository(application);
     }
 
-    public void update(User user) {
-        userRepository.update(user);
-    }
-
-    public LiveData<User> getUser(int id) {
-        return userRepository.getUser(id);
+    public LiveData<User> checkPhoneNumber(String phone, String codePhone) {
+        return userRepository.checkPhoneNumber(phone, codePhone);
     }
 }

@@ -11,215 +11,264 @@
             type="com.menu.androidcourseproject.model.User" />
     </data>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="250dp"
+            android:layout_height="0dp"
+            android:src="@drawable/layout_background"
+            app:layout_constraintBottom_toTopOf="@+id/guideline22"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView12"
+            android:layout_width="250dp"
+            android:layout_height="0dp"
+            android:src="@drawable/layout2_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline24" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.33" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.68" />
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-
-            <TextView
-                android:id="@+id/reg_full_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:background="@drawable/edit_text_background"
-                android:drawableStart="@drawable/ic_name"
-                android:drawableLeft="@drawable/ic_name"
-                android:drawablePadding="10dp"
-                android:elevation="5dp"
-                android:ems="10"
-                android:hint="Full name"
-                android:inputType="textPersonName"
-                android:text="@{user.fullName}"
-                android:textColor="#150f01"
-                android:textColorHint="#150f01"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/reg_image_profile" />
-
-            <TextView
-                android:id="@+id/reg_username"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:background="@drawable/edit_text_background"
-                android:drawableStart="@drawable/ic_name"
-                android:drawableLeft="@drawable/ic_name"
-                android:drawablePadding="10dp"
-                android:elevation="5dp"
-                android:ems="10"
-                android:hint="username"
-                android:inputType="textPersonName"
-                android:text="@{user.username}"
-                android:textColor="#150f01"
-                android:textColorHint="#150f01"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/reg_email" />
-
-            <TextView
-                android:id="@+id/reg_email"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:background="@drawable/edit_text_background"
-                android:drawableStart="@drawable/ic_baseline_email_24"
-                android:drawableLeft="@drawable/ic_baseline_email_24"
-                android:drawablePadding="10dp"
-                android:drawableTint="@color/black"
-                android:elevation="5dp"
-                android:ems="10"
-                android:hint="email"
-                android:inputType="textEmailAddress"
-                android:text="@{user.email}"
-                android:textColor="#150f01"
-                android:textColorHint="#150f01"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/reg_full_name"
-                tools:targetApi="m" />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/reg_image_profile"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="16dp"
-                android:loadImage="@{user.URLImage}"
-                android:src="@drawable/ic_account"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/reg_add_image"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:elevation="5dp"
-                android:src="@drawable/ic_verified"
-                android:visibilityVerified="@{user.verified}"
-                app:layout_constraintBottom_toBottomOf="@+id/reg_image_profile"
-                app:layout_constraintEnd_toEndOf="@+id/reg_image_profile"
-                app:layout_constraintHorizontal_bias="0.9"
-                app:layout_constraintStart_toStartOf="@+id/reg_image_profile"
-                app:layout_constraintTop_toTopOf="@+id/reg_image_profile"
-                app:layout_constraintVertical_bias="0.9" />
-
-            <ImageView
-                android:id="@+id/male_female"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:elevation="5dp"
-                android:male="@{user.male}"
-                app:layout_constraintBottom_toBottomOf="@+id/reg_image_profile"
-                app:layout_constraintEnd_toEndOf="@+id/reg_image_profile"
-                app:layout_constraintHorizontal_bias="0.11"
-                app:layout_constraintStart_toStartOf="@+id/reg_image_profile"
-                app:layout_constraintTop_toTopOf="@+id/reg_image_profile"
-                app:layout_constraintVertical_bias="0.9" />
-
-            <LinearLayout
-                android:id="@+id/linearLayout3"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/reg_username">
+                android:layout_height="match_parent">
 
-                <com.hbb20.CountryCodePicker
-                    android:id="@+id/reg_code_phone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:background="@drawable/edit_text_background"
-                    android:codePhone="@{user.country}"
-                    android:elevation="5dp"
-                    android:enabled="false"
-                    android:padding="7dp" />
 
                 <TextView
-                    android:id="@+id/reg_phone_number"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/reg_full_name"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
                     android:background="@drawable/edit_text_background"
-                    android:drawableStart="@drawable/ic_phone"
-                    android:drawableLeft="@drawable/ic_phone"
+                    android:drawableStart="@drawable/ic_name"
+                    android:drawableLeft="@drawable/ic_name"
                     android:drawablePadding="10dp"
                     android:elevation="5dp"
                     android:ems="10"
-
-                    android:hint="phone"
-                    android:inputType="phone"
-                    android:text="@{user.phone}"
+                    android:hint="Full name"
+                    android:inputType="textPersonName"
+                    android:text="@{user.fullName}"
                     android:textColor="#150f01"
-                    android:textColorHint="#150f01" />
-            </LinearLayout>
+                    android:textColorHint="#150f01"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/reg_image_profile" />
+
+                <TextView
+                    android:id="@+id/reg_username"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/edit_text_background"
+                    android:drawableStart="@drawable/ic_name"
+                    android:drawableLeft="@drawable/ic_name"
+                    android:drawablePadding="10dp"
+                    android:elevation="5dp"
+                    android:ems="10"
+                    android:hint="username"
+                    android:inputType="textPersonName"
+                    android:text="@{user.username}"
+                    android:textColor="#150f01"
+                    android:textColorHint="#150f01"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/reg_email" />
+
+                <TextView
+                    android:id="@+id/reg_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/edit_text_background"
+                    android:drawableStart="@drawable/ic_baseline_email_24"
+                    android:drawableLeft="@drawable/ic_baseline_email_24"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/black"
+                    android:elevation="5dp"
+                    android:ems="10"
+                    android:hint="email"
+                    android:inputType="textEmailAddress"
+                    android:text="@{user.email}"
+                    android:textColor="#150f01"
+                    android:textColorHint="#150f01"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/reg_full_name"
+                    tools:targetApi="m" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/reg_image_profile"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="84dp"
+                    android:loadImage="@{user.URLImage}"
+                    android:src="@drawable/ic_account"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.497"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/reg_add_image"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:elevation="5dp"
+                    android:src="@drawable/ic_verified"
+                    android:visibilityVerified="@{user.verified}"
+                    app:layout_constraintBottom_toBottomOf="@+id/reg_image_profile"
+                    app:layout_constraintEnd_toEndOf="@+id/reg_image_profile"
+                    app:layout_constraintHorizontal_bias="0.9"
+                    app:layout_constraintStart_toStartOf="@+id/reg_image_profile"
+                    app:layout_constraintTop_toTopOf="@+id/reg_image_profile"
+                    app:layout_constraintVertical_bias="0.9" />
+
+                <ImageView
+                    android:id="@+id/male_female"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:elevation="5dp"
+                    android:male="@{user.male}"
+                    app:layout_constraintBottom_toBottomOf="@+id/reg_image_profile"
+                    app:layout_constraintEnd_toEndOf="@+id/reg_image_profile"
+                    app:layout_constraintHorizontal_bias="0.11"
+                    app:layout_constraintStart_toStartOf="@+id/reg_image_profile"
+                    app:layout_constraintTop_toTopOf="@+id/reg_image_profile"
+                    app:layout_constraintVertical_bias="0.9" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/reg_username">
+
+                    <com.hbb20.CountryCodePicker
+                        android:id="@+id/reg_code_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+
+                        android:background="@drawable/edit_text_background"
+                        android:codePhone="@{user.codePhone}"
+                        android:elevation="5dp"
+                        android:enabled="false"
+                        android:padding="7dp" />
+
+                    <TextView
+                        android:id="@+id/reg_phone_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/edit_text_background"
+                        android:drawableStart="@drawable/ic_phone"
+                        android:drawableLeft="@drawable/ic_phone"
+                        android:drawablePadding="10dp"
+                        android:elevation="5dp"
+                        android:ems="10"
+
+                        android:hint="phone"
+                        android:inputType="phone"
+                        android:text="@{user.phone}"
+                        android:textColor="#150f01"
+                        android:textColorHint="#150f01" />
+                </LinearLayout>
 
 
-            <TextView
-                android:id="@+id/reg_birth_date"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_weight="7"
-                android:background="@drawable/edit_text_background"
-                android:drawableStart="@drawable/ic_cake"
-                android:drawableLeft="@drawable/ic_cake"
-                android:drawablePadding="10dp"
-                android:elevation="5dp"
-                android:ems="10"
-                android:enabled="false"
-                android:hint="BirthDate"
-                android:inputType="textPersonName"
-                android:text="@{user.birthDate}"
-                android:textColor="#150f01"
-                android:textColorHint="#150f01"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+                <TextView
+                    android:id="@+id/reg_birth_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="7"
+                    android:background="@drawable/edit_text_background"
+                    android:drawableStart="@drawable/ic_cake"
+                    android:drawableLeft="@drawable/ic_cake"
+                    android:drawablePadding="10dp"
+                    android:elevation="5dp"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:hint="BirthDate"
+                    android:inputType="textPersonName"
+                    android:text="@{user.birthDate}"
+                    android:textColor="#150f01"
+                    android:textColorHint="#150f01"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
-            <CheckBox
-                android:id="@+id/reg_administrator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="@{user.administrator}"
-                android:elevation="5dp"
-                android:enabled="false"
-                android:text="Is Administrator"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/reg_birth_date" />
+                <CheckBox
+                    android:id="@+id/reg_administrator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="32dp"
+                    android:checked="@{user.administrator}"
+                    android:elevation="5dp"
+                    android:enabled="false"
+                    android:text="Is Administrator"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/reg_birth_date" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

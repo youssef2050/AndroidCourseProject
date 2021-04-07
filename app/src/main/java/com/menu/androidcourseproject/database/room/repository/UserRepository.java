@@ -58,6 +58,8 @@ public class UserRepository {
 
     public LiveData<User> checkUsernameAndEmail(String email, String username) {
         return userDao.checkUsername(email,username);
+    }public LiveData<User> checkPhoneNumber(String phone, String codePhone) {
+        return userDao.checkPhoneNumber(phone,codePhone);
     }
 
     public void update(String password, int id) {

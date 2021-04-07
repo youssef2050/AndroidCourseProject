@@ -56,19 +56,21 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (sharedPreferences.getInt(getString(R.string.login), 0) >= 1) {
-            transition(view, R.id.homeFragment);
+            transition(R.id.homeFragment);
         }
         if (getArguments() != null) {
             loginFragmentBinding.loginUsername.setText(getArguments().getString(getString(R.string.username_key)));
             loginFragmentBinding.loginPassword.setText(getArguments().getString(getString(R.string.password_key)));
         }
         loginFragmentBinding.butLogin.setOnClickListener(v -> login(view));
-        loginFragmentBinding.butSinup.setOnClickListener(v -> transition(view, R.id.registerFragment));
+        loginFragmentBinding.butSinup.setOnClickListener(v -> transition(R.id.registerFragment));
+        loginFragmentBinding.loginForgotPassword.setOnClickListener(v -> transition(R.id.forgotPasswordFragment));
     }
 
-    private void transition(@NonNull View view, int FragmentId) {
-        Navigation.findNavController(view).navigate(FragmentId);
+    private void transition(int FragmentId) {
+        Navigation.findNavController(requireView()).navigate(FragmentId);
     }
+
     private void login(@NonNull View view) {
         String username = loginFragmentBinding.loginUsername.getText().toString();
         String password = loginFragmentBinding.loginPassword.getText().toString();
@@ -81,7 +83,7 @@ public class LoginFragment extends Fragment {
                 @Override
                 public void onChanged(User user) {
                     if (user != null) {
-                        transition(view, R.id.homeFragment);
+                        transition(R.id.homeFragment);
                         if (loginFragmentBinding.rememberMe.isChecked()) {
                             editor.putInt(getString(R.string.login), user.getId());
                             editor.apply();

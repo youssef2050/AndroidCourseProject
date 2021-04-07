@@ -132,13 +132,14 @@ public class RegisterFragment extends Fragment {
                 @Override
                 public void onChanged(User users) {
                     if (users == null) {
-                        addImages.saveImageInStorage(image, "profileImage", user.getUsername());
+                        user.setURLImage(addImages.saveImageInStorage(image, "profileImage", user.getUsername()));
                         mViewModel.insert(user);
                         Bundle bundle = new Bundle();
                         bundle.putString(getString(R.string.username_key), user.getUsername());
                         bundle.putString(getString(R.string.password_key), user.getPassword());
                         Navigation.findNavController(getView()).navigate(R.id.loginFragment, bundle);
-                    }
+                    }else
+                        Toast.makeText(requireContext(), "the username or email is found!", Toast.LENGTH_SHORT).show();
                 }
             });
         } else {

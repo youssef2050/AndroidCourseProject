@@ -7,4 +7,7 @@
     <string name="username_key">username</string>
     <string name="url_default">url</string>
     <string name="resend_code">Resend code</string>
+    <string name="phoneNumber">phone</string>
+    <string name="codePhone">codePhone</string>
+    <string name="user_id">user_id</string>
 </resources>

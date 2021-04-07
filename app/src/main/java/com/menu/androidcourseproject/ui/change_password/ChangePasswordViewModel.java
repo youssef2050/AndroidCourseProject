@@ -1,4 +1,4 @@
-package com.menu.androidcourseproject.ui.changePassword;
+package com.menu.androidcourseproject.ui.change_password;
 
 import androidx.lifecycle.ViewModel;
 

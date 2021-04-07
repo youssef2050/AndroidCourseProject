@@ -33,4 +33,7 @@ public interface UserDao {
 
     @Query("update user  set password = :password where id = :id")
     void update(String password, int id);
+
+    @Query("select * from user where phone = :phone and codePhone = :codePhone")
+    LiveData<User> checkPhoneNumber(String phone, String codePhone);
 }

@@ -212,8 +212,12 @@ public class User {
     @BindingAdapter("android:male")
     public static void male(ImageView view, boolean male) {
         view.setImageDrawable(male ? Meal.activity.getResources().getDrawable(R.drawable.ic_male) : Meal.activity.getResources().getDrawable(R.drawable.ic_female));
-    }  @BindingAdapter("android:codePhone")
-    public static void male(CountryCodePicker view, String codePhone) {
-        view.setDefaultCountryUsingNameCode(codePhone);
+    }
+
+    @BindingAdapter("android:codePhone")
+    public static void codePhone(CountryCodePicker countryCodePicker, String codePhone) {
+        System.out.println(codePhone);
+        if (codePhone != null)
+            countryCodePicker.setCountryForPhoneCode(Integer.parseInt(codePhone));
     }
 }

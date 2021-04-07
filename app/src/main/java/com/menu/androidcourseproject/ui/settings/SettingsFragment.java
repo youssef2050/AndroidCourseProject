@@ -4,12 +4,10 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.method.PasswordTransformationMethod;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +28,7 @@ public class SettingsFragment extends Fragment {
     private SettingsViewModel mViewModel;
     private SettingsFragmentBinding settingsFragmentBinding;
     private SharedPreferences sharedPreferences;
+    private int user_id;
 
     public static SettingsFragment newInstance() {
         return new SettingsFragment();
@@ -47,6 +46,7 @@ public class SettingsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(SettingsViewModel.class);
         sharedPreferences = requireActivity().getSharedPreferences(getString(R.string.shared_key), Context.MODE_PRIVATE);
+        user_id = sharedPreferences.getInt(getString(R.string.login), 0);
     }
 
     @Override
@@ -57,12 +57,17 @@ public class SettingsFragment extends Fragment {
         settingsFragmentBinding.showAllPurchase.setOnClickListener(v -> getNavigate(R.id.purchaseListFragment));
         settingsFragmentBinding.showProfile.setOnClickListener(v -> getNavigate(R.id.profileFragment));
         settingsFragmentBinding.addNewItem.setOnClickListener(v -> getNavigate(R.id.newItemFragment));
-        settingsFragmentBinding.changePassword.setOnClickListener(v -> getAlert());
+        settingsFragmentBinding.changePassword.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putInt(getString(R.string.user_id), user_id);
+            Navigation.findNavController(requireView()).navigate(R.id.changePasswordFragment, bundle);
+        });
+
         settingsFragmentBinding.showLastPurchase.setOnClickListener(v -> getAlertLastPurchase());
     }
 
     private void getAlertLastPurchase() {
-        mViewModel.getLastPurchase(sharedPreferences.getInt(getString(R.string.login), 0)).observe(getViewLifecycleOwner(), purchaseListAdapters -> {
+        mViewModel.getLastPurchase(user_id).observe(getViewLifecycleOwner(), purchaseListAdapters -> {
             if (purchaseListAdapters.size() != 0) {
                 PurchaseListAdapter purchaseListAdapterMax = purchaseListAdapters.get(0);
 
@@ -98,36 +103,6 @@ public class SettingsFragment extends Fragment {
         });
     }
 
-    private void getAlert() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(requireContext());
-        alertDialog.setTitle("Change password");
-        final EditText oldPass = new EditText(requireContext());
-        final EditText newPass = new EditText(requireContext());
-        final EditText confirmPass = new EditText(requireContext());
-        oldPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
-        newPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
-        confirmPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
-        oldPass.setHint("Old Password");
-        newPass.setHint("New Password");
-        confirmPass.setHint("Confirm Password");
-        LinearLayout ll = new LinearLayout(requireContext());
-        ll.setOrientation(LinearLayout.VERTICAL);
-        ll.addView(oldPass);
-        ll.addView(newPass);
-        ll.addView(confirmPass);
-        alertDialog.setView(ll);
-
-        alertDialog.setPositiveButton("Yes",
-                (dialog, id) -> {
-                    mViewModel.update(newPass.getText().toString().equals(confirmPass.getText().toString()) ? newPass.getText().toString() : "", sharedPreferences.getInt(getString(R.string.login), 0));
-                    dialog.cancel();
-                });
-        alertDialog.setNegativeButton("No",
-                (dialog, id) -> dialog.cancel());
-
-        AlertDialog alert11 = alertDialog.create();
-        alert11.show();
-    }
 
     private void getNavigate(int id) {
         Navigation.findNavController(requireView()).navigate(id);
