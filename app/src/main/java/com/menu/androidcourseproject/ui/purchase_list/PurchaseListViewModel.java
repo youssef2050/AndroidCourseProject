@@ -18,10 +18,11 @@ public class PurchaseListViewModel extends AndroidViewModel {
     public PurchaseListViewModel(@NonNull Application application) {
         super(application);
         purchaseRepository = new PurchaseRepository(application);
-        purchaseListAdapterLiveData = purchaseRepository.getAllPurchases();
+
     }
 
-    public LiveData<List<PurchaseListAdapter>> getPurchaseListAdapterLiveData() {
+    public LiveData<List<PurchaseListAdapter>> getPurchaseListAdapterLiveData(int id) {
+        purchaseListAdapterLiveData = purchaseRepository.getAllPurchases(id);
         return purchaseListAdapterLiveData;
     }
 }

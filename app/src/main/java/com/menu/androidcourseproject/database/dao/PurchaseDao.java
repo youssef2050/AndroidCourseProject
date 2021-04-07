@@ -18,6 +18,6 @@ public interface PurchaseDao {
     @Query("Delete  from purchase")
     void deleteAllPurchase();
 
-    @Query("select m.id,p.date,m.mealTitle,p.numberMeal,m.prise,fullName from purchase p, meal m,user u where m.id = p.mealId and p.userId = u.id")
-    LiveData<List<PurchaseListAdapter>> getPurchase();
+    @Query("select m.id,p.date,m.mealTitle,p.numberMeal,m.prise,u.fullName,p.timeInMillis from purchase p, meal m,user u where m.id = p.mealId and p.userId = u.id and u.id =:id")
+    LiveData<List<PurchaseListAdapter>> getPurchase(int id);
 }

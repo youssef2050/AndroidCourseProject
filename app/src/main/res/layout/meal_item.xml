@@ -112,6 +112,8 @@
                         android:id="@+id/textView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
                         android:text="@{meal.cash ? `كاش`:`تقسيط`,default = `كاش`}"
                         android:textColor="#CECDCE"
                         android:textSize="18sp"

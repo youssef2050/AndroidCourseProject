@@ -24,7 +24,6 @@ public class PurchaseRepository {
     public PurchaseRepository(Application application) {
         MyDatabase myDatabase = MyDatabase.getInstance(application.getApplicationContext());
         purchaseDao = myDatabase.purchaseDao();
-        allPurchases = purchaseDao.getPurchase();
     }
 
     public void deleteAll() {
@@ -43,7 +42,9 @@ public class PurchaseRepository {
                         throwable -> Log.e(TAG, "insert: error", throwable));
     }
 
-    public LiveData<List<PurchaseListAdapter>> getAllPurchases() {
+    public LiveData<List<PurchaseListAdapter>> getAllPurchases(int id) {
+        allPurchases = purchaseDao.getPurchase(id);
         return allPurchases;
     }
+
 }

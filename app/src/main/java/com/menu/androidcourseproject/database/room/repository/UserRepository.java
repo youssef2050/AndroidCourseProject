@@ -59,4 +59,12 @@ public class UserRepository {
     public LiveData<User> checkUsernameAndEmail(String email, String username) {
         return userDao.checkUsername(email,username);
     }
+
+    public void update(String password, int id) {
+        Completable.fromAction(() -> userDao.update(password,id))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(() -> Log.d(TAG, "update: "),
+                        throwable -> Log.d(TAG, "update: error"));
+    }
 }

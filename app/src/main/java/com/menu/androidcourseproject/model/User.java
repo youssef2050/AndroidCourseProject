@@ -2,10 +2,17 @@ package com.menu.androidcourseproject.model;
 
 import android.text.TextUtils;
 import android.util.Patterns;
+import android.view.View;
+import android.widget.ImageView;
 
+import androidx.databinding.BindingAdapter;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import com.hbb20.CountryCodePicker;
+import com.menu.androidcourseproject.R;
+import com.menu.androidcourseproject.general.AddImages;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +27,7 @@ public class User {
     private String password;
     private String country;
     private String birthDate;
+    private String codePhone;
     private String phone;
     private boolean Administrator;
     private boolean Male;
@@ -29,19 +37,28 @@ public class User {
     private Map<String, Boolean> errors;
 
 
-    public User(String fullName, String email, String username, String password, String country, String birthDate, String phone, boolean administrator, boolean male, String URLImage, boolean verified) {
+    public User(String fullName, String email, String username, String password, String country, String birthDate, String codePhone, String phone, boolean administrator, boolean male, String URLImage, boolean verified) {
         this.fullName = fullName;
         this.email = email;
         this.username = username;
         this.password = password;
         this.country = country;
         this.birthDate = birthDate;
+        this.codePhone = codePhone;
         this.phone = phone;
         Administrator = administrator;
         Male = male;
         this.URLImage = URLImage;
         this.verified = verified;
         errors = new HashMap<>();
+    }
+
+    public String getCodePhone() {
+        return codePhone;
+    }
+
+    public void setCodePhone(String codePhone) {
+        this.codePhone = codePhone;
     }
 
     public User() {
@@ -181,5 +198,23 @@ public class User {
 
     public Map<String, Boolean> getErrors() {
         return errors;
+    }
+
+    @BindingAdapter("android:loadImage")
+    public static void loadImage(ImageView imageView, String imageUrl) {
+        imageView.setImageBitmap(new AddImages(Meal.activity).loadImageFromStorage(imageUrl));
+    }
+
+    @BindingAdapter("android:visibilityVerified")
+    public static void visibility(View view, boolean verified) {
+        view.setVisibility(verified ? View.VISIBLE : View.GONE);
+    }
+
+    @BindingAdapter("android:male")
+    public static void male(ImageView view, boolean male) {
+        view.setImageDrawable(male ? Meal.activity.getResources().getDrawable(R.drawable.ic_male) : Meal.activity.getResources().getDrawable(R.drawable.ic_female));
+    }  @BindingAdapter("android:codePhone")
+    public static void male(CountryCodePicker view, String codePhone) {
+        view.setDefaultCountryUsingNameCode(codePhone);
     }
 }

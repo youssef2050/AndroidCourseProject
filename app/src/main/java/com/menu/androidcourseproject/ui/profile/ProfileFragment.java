@@ -10,11 +10,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.menu.androidcourseproject.R;
+import com.menu.androidcourseproject.databinding.ProfileFragmentBinding;
+import com.menu.androidcourseproject.model.Meal;
 
 public class ProfileFragment extends Fragment {
 
     private ProfileViewModel mViewModel;
+    private ProfileFragmentBinding profileFragmentBinding;
 
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
@@ -23,14 +25,27 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.profile_fragment, container, false);
+        profileFragmentBinding = ProfileFragmentBinding.inflate(getLayoutInflater());
+        return profileFragmentBinding.getRoot();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
-        // TODO: Use the ViewModel
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        Meal.activity = requireActivity();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mViewModel.getUser(1).observe(getViewLifecycleOwner(), user -> {
+            profileFragmentBinding.setUser(user);
+        });
+    }
 }

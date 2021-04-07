@@ -7,14 +7,24 @@ public class PurchaseListAdapter {
     private int numberMeal;
     private double prise;
     private String fullName;
+    private long timeInMillis;
 
-    public PurchaseListAdapter(int id, String date, String mealTitle, int numberMeal, double prise, String fullName) {
+    public PurchaseListAdapter(int id, String date, String mealTitle, int numberMeal, double prise, String fullName, long timeInMillis) {
         this.id = id;
         this.date = date;
         this.mealTitle = mealTitle;
         this.numberMeal = numberMeal;
         this.prise = prise;
         this.fullName = fullName;
+        this.timeInMillis = timeInMillis;
+    }
+
+    public long getTimeInMillis() {
+        return timeInMillis;
+    }
+
+    public void setTimeInMillis(long timeInMillis) {
+        this.timeInMillis = timeInMillis;
     }
 
     public int getId() {

@@ -1,5 +1,6 @@
 package com.menu.androidcourseproject.ui.new_meal;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -28,6 +29,7 @@ import com.menu.androidcourseproject.model.Meal;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Objects;
+import java.util.Random;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -75,10 +77,11 @@ public class NewItemFragment extends Fragment {
         Meal meal = new Meal(
                 newItemFragmentBinding.newMealName.getText().toString(),
                 newItemFragmentBinding.newMealDescription.getText().toString(),
-                Double.parseDouble(Objects.requireNonNull(newItemFragmentBinding.newMealPrice.getText().toString())),
-                addImages.saveImageInStorage(image, "mealImages", System.currentTimeMillis() + ""),
+                newItemFragmentBinding.newMealPrice.getText().toString().equals("") ? 0 : Double.parseDouble(Objects.requireNonNull(newItemFragmentBinding.newMealPrice.getText().toString())),
+                image != null ? addImages.saveImageInStorage(image, "mealImages", System.currentTimeMillis() + "") :
+                        requireActivity().getSharedPreferences(getString(R.string.shared_key), Context.MODE_PRIVATE).getString(getString(R.string.url_default), ""),
                 newItemFragmentBinding.newMealCash.isChecked(),
-                0,
+                new Random().nextInt(5),
                 false
         );
         if (meal.isOK()) {

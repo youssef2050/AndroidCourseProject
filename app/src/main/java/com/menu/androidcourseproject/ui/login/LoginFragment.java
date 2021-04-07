@@ -56,7 +56,7 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (sharedPreferences.getInt(getString(R.string.login), 0) >= 1) {
-            transition(view, R.id.newItemFragment);
+            transition(view, R.id.settingsFragment);
         }
         if (getArguments() != null) {
             loginFragmentBinding.loginUsername.setText(getArguments().getString(getString(R.string.username_key)));

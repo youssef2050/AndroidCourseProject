@@ -30,4 +30,7 @@ public interface UserDao {
 
     @Query("select * from User where email=:email or username = :username")
     LiveData<User> checkUsername(String email, String username);
+
+    @Query("update user  set password = :password where id = :id")
+    void update(String password, int id);
 }

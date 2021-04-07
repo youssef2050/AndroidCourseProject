@@ -116,12 +116,13 @@ public class RegisterFragment extends Fragment {
 
 
     private void sinIn() {
-        final User user = new User(registerFragmentBinding.regFullName.getText().toString(),
+        User user = new User(registerFragmentBinding.regFullName.getText().toString(),
                 registerFragmentBinding.regEmail.getText().toString(),
                 registerFragmentBinding.regUsername.getText().toString(),
                 registerFragmentBinding.regPassword.getText().toString().equals(registerFragmentBinding.regRePassword.getText().toString()) ? registerFragmentBinding.regPassword.getText().toString() : "",
-                registerFragmentBinding.regCodePhone.getSelectedCountryEnglishName() + " " + registerFragmentBinding.regCodePhone.getSelectedCountryCode(),
+                registerFragmentBinding.regCodePhone.getSelectedCountryEnglishName(),
                 registerFragmentBinding.regBirthDate.getText().toString(),
+                registerFragmentBinding.regCodePhone.getSelectedCountryCode(),
                 registerFragmentBinding.regPhoneNumber.getText().toString(),
                 registerFragmentBinding.regAdministrator.isChecked(),
                 registerFragmentBinding.regMale.isChecked(),

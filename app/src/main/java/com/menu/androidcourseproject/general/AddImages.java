@@ -6,8 +6,6 @@ import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.menu.androidcourseproject.R;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -46,7 +44,8 @@ public class AddImages {
     }
 
     public Bitmap loadImageFromStorage(String path) {
-        if (!path.equals("")) {
+        System.out.println("path : " + path);
+        if (!path.equals("") && path != null) {
             try {
                 File f = new File(path);
                 return BitmapFactory.decodeStream(new FileInputStream(f));
@@ -54,6 +53,6 @@ public class AddImages {
                 e.printStackTrace();
             }
         }
-        return BitmapFactory.decodeResource(activity.getResources(), R.drawable.ic_account);
+        return null;
     }
 }

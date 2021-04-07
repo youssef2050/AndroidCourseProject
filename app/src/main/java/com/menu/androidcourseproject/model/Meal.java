@@ -129,7 +129,6 @@ public class Meal implements Parcelable {
 
     @BindingAdapter("android:loadImage")
     public static void loadImage(ImageView imageView, String imageUrl) {
-
         imageView.setImageBitmap(new AddImages(activity).loadImageFromStorage(imageUrl));
     }
 
