@@ -1,7 +1,23 @@
 package com.menu.androidcourseproject.ui.change_password;
 
-import androidx.lifecycle.ViewModel;
+import android.app.Application;
 
-public class ChangePasswordViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+
+import com.menu.androidcourseproject.database.room.repository.UserRepository;
+import com.menu.androidcourseproject.model.User;
+
+public class ChangePasswordViewModel extends AndroidViewModel {
+    private UserRepository userRepository;
+
+    public ChangePasswordViewModel(@NonNull Application application) {
+        super(application);
+        userRepository = new UserRepository(application);
+    }
+
+    public LiveData<User> checkOldPassword(String password, int id) {
+        return userRepository.checkOldPassword(password, id);
+    }
 }

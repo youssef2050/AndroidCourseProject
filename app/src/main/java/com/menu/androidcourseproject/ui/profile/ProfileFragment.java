@@ -70,7 +70,8 @@ public class ProfileFragment extends Fragment {
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                snackbar.dismiss();
+                if (snackbar != null)
+                    snackbar.dismiss();
                 Navigation.findNavController(requireView()).navigate(R.id.settingsFragment);
             }
         };

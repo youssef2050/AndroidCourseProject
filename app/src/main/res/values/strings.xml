@@ -10,4 +10,5 @@
     <string name="phoneNumber">phone</string>
     <string name="codePhone">codePhone</string>
     <string name="user_id">user_id</string>
+    <string name="numberFragment">number_fragment</string>
 </resources>

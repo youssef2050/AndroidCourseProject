@@ -11,10 +11,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.menu.androidcourseproject.R;
+import com.menu.androidcourseproject.databinding.ChangePasswordFragmentBinding;
 
 public class ChangePasswordFragment extends Fragment {
 
     private ChangePasswordViewModel mViewModel;
+    private ChangePasswordFragmentBinding changePasswordFragmentBinding;
 
     public static ChangePasswordFragment newInstance() {
         return new ChangePasswordFragment();
@@ -23,14 +25,24 @@ public class ChangePasswordFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.change_password_fragment, container, false);
+        changePasswordFragmentBinding = ChangePasswordFragmentBinding.inflate(getLayoutInflater());
+        return changePasswordFragmentBinding.getRoot();
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(ChangePasswordViewModel.class);
-        // TODO: Use the ViewModel
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+       int fragment = getArguments().getInt(getString(R.string.numberFragment));
+       if (fragment == 0){
+
+       }else {
+
+       }
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mViewModel = new ViewModelProvider(this).get(ChangePasswordViewModel.class);
+    }
 }

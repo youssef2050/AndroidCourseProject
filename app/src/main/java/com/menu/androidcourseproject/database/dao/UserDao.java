@@ -36,4 +36,7 @@ public interface UserDao {
 
     @Query("select * from user where phone = :phone and codePhone = :codePhone")
     LiveData<User> checkPhoneNumber(String phone, String codePhone);
+
+    @Query("select * from user where password = :password and id = :id")
+    LiveData<User> checkOldPassword(String password, int id);
 }

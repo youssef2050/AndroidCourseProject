@@ -49,6 +49,7 @@ public class ForgotPasswordFragment extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putString(getString(R.string.phoneNumber), forgotPasswordFragmentBinding.edPhoneNumber.getText().toString());
                     bundle.putString(getString(R.string.codePhone), forgotPasswordFragmentBinding.ccpCodePhone.getSelectedCountryCode());
+                    bundle.putInt(getString(R.string.user_id), user.getId());
                     Navigation.findNavController(requireView()).navigate(R.id.verifiedFragment, bundle);
                 } else {
                     Toast.makeText(requireContext(), "not found!", Toast.LENGTH_SHORT).show();

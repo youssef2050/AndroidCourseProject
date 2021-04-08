@@ -57,13 +57,17 @@ public class UserRepository {
     }
 
     public LiveData<User> checkUsernameAndEmail(String email, String username) {
-        return userDao.checkUsername(email,username);
-    }public LiveData<User> checkPhoneNumber(String phone, String codePhone) {
-        return userDao.checkPhoneNumber(phone,codePhone);
+        return userDao.checkUsername(email, username);
     }
 
+    public LiveData<User> checkPhoneNumber(String phone, String codePhone) {
+        return userDao.checkPhoneNumber(phone, codePhone);
+    }
+    public LiveData<User> checkOldPassword(String password, int  id) {
+        return userDao.checkOldPassword(password, id);
+    }
     public void update(String password, int id) {
-        Completable.fromAction(() -> userDao.update(password,id))
+        Completable.fromAction(() -> userDao.update(password, id))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> Log.d(TAG, "update: "),
