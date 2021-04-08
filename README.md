@@ -1,14 +1,14 @@
 # AndroidCourseProject
-Android Course Project
-View model 
-live data 
-room database 
-MVVM pattern 
-Phone Auth use firebase 
-Internal storage
-Data binding
-one Activity
-Navigation component
-RxJava and RxAndroid
-Recycler View
-other libraries
+Android Course Project<//br>
+View model <//br>
+live data <//br>
+room database <//br>
+MVVM pattern <//br>
+Phone Auth use firebase<//br> 
+Internal storage<//br>
+Data binding<//br>
+one Activity<//br>
+Navigation component<//br>
+RxJava and RxAndroid<//br>
+Recycler View<//br>
+other libraries<//br>
