@@ -7,7 +7,7 @@ MVVM pattern </br>
 Phone Auth use firebase</br>
 Internal storage</br>
 Data binding</br>
-one Activity</br>Cancel changes
+one Activity</br>
 Navigation component</br>
 RxJava and RxAndroid</br>
 Recycler View</br>
