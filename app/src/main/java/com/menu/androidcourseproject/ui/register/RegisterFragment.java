@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -79,6 +80,13 @@ public class RegisterFragment extends Fragment {
         registerFragmentBinding.regAddImage.setOnClickListener(v -> {
             getPermission();
         });
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Navigation.findNavController(requireView()).navigate(R.id.loginFragment);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(requireActivity(), callback);
     }
 
 
@@ -138,7 +146,7 @@ public class RegisterFragment extends Fragment {
                         bundle.putString(getString(R.string.username_key), user.getUsername());
                         bundle.putString(getString(R.string.password_key), user.getPassword());
                         Navigation.findNavController(getView()).navigate(R.id.loginFragment, bundle);
-                    }else
+                    } else
                         Toast.makeText(requireContext(), "the username or email is found!", Toast.LENGTH_SHORT).show();
                 }
             });

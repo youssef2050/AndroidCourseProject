@@ -5,4 +5,9 @@
 
     <solid android:color="@color/yellow300" />
     <corners android:radius="10dp" />
+    <padding
+        android:bottom="15dp"
+        android:left="15dp"
+        android:right="15dp"
+        android:top="15dp" />
 </shape>
