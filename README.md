@@ -1,5 +1,5 @@
 # AndroidCourseProject
-Android Course Project<//br>
+Android Course Project</br>
 View model </br>
 live data </br>
 room database </br>
@@ -15,4 +15,4 @@ other libraries</br>
 
 <img align="center" src="https://github.com/youssef2050/AndroidCourseProject/blob/master/images/login.jpg" width="300px"></br>
 </br>
-<img align="center" src="https://github.com/youssef2050/AndroidCourseProject/blob/master/images/sinup.jpg">
+<img align="center" src="https://github.com/youssef2050/AndroidCourseProject/blob/master/images/sinup.jpg" width="300px">
