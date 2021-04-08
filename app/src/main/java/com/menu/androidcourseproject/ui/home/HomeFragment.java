@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -25,6 +26,8 @@ import com.menu.androidcourseproject.adapters.MealAdapter;
 import com.menu.androidcourseproject.databinding.HomeFragmentBinding;
 import com.menu.androidcourseproject.general.AddImages;
 import com.menu.androidcourseproject.model.Meal;
+
+import java.io.File;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -112,14 +115,15 @@ public class HomeFragment extends Fragment implements MealAdapter.onClickButtons
     @Override
     public void share(Meal meal) {
         String text = meal.getMealTitle();
-        Uri imageUri = Uri.parse(meal.getURLImage());
+        Uri path = Uri.parse(meal.getURLImage());
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_TEXT, text);
-        shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
-        shareIntent.setType("image/*");
+        shareIntent.putExtra(Intent.EXTRA_STREAM, path);
         shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        startActivity(Intent.createChooser(shareIntent, "Share images..."));
+        shareIntent.setType("image/*");
+        startActivity(Intent.createChooser(shareIntent, "Share..."));
+
     }
 
     @Override
