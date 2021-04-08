@@ -88,7 +88,6 @@ public class DetailsFragment extends Fragment {
             } else {
                 detailsFragmentBinding.detailsFav.setIcon(getActivity().getDrawable(R.drawable.ic_favorite_border));
             }
-            Navigation.findNavController(getView()).navigate(R.id.purchaseListFragment);
         });
         detailsFragmentBinding.detailsSave.setOnClickListener(v -> {
             @SuppressLint("UseRequireInsteadOfGet") SharedPreferences sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(getString(R.string.shared_key), MODE_PRIVATE);

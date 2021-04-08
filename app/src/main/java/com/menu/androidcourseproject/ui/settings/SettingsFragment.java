@@ -57,20 +57,22 @@ public class SettingsFragment extends Fragment {
         settingsFragmentBinding.showAllPurchase.setOnClickListener(v -> getNavigate(R.id.purchaseListFragment));
         settingsFragmentBinding.showProfile.setOnClickListener(v -> getNavigate(R.id.profileFragment));
         settingsFragmentBinding.addNewItem.setOnClickListener(v -> getNavigate(R.id.newItemFragment));
-        settingsFragmentBinding.changePassword.setOnClickListener(v -> {
-            Bundle bundle = new Bundle();
-            bundle.putInt(getString(R.string.user_id), user_id);
-            Navigation.findNavController(requireView()).navigate(R.id.changePasswordFragment, bundle);
-        });
-
+        settingsFragmentBinding.changePassword.setOnClickListener(v -> Navigation.findNavController(requireView()).
+                navigate(R.id.changePasswordFragment));
         settingsFragmentBinding.showLastPurchase.setOnClickListener(v -> getAlertLastPurchase());
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Navigation.findNavController(requireView()).navigate(R.id.homeFragment);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(requireActivity(), callback);
     }
 
     private void getAlertLastPurchase() {
         mViewModel.getLastPurchase(user_id).observe(getViewLifecycleOwner(), purchaseListAdapters -> {
             if (purchaseListAdapters.size() != 0) {
                 PurchaseListAdapter purchaseListAdapterMax = purchaseListAdapters.get(0);
-
                 for (int i = 1; i < purchaseListAdapters.size(); i++) {
                     if (purchaseListAdapters.get(i).getTimeInMillis() > purchaseListAdapterMax.getTimeInMillis()) {
                         purchaseListAdapterMax = purchaseListAdapters.get(i);

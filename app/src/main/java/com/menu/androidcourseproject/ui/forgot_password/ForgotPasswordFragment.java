@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -49,12 +50,19 @@ public class ForgotPasswordFragment extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putString(getString(R.string.phoneNumber), forgotPasswordFragmentBinding.edPhoneNumber.getText().toString());
                     bundle.putString(getString(R.string.codePhone), forgotPasswordFragmentBinding.ccpCodePhone.getSelectedCountryCode());
-                    bundle.putInt(getString(R.string.user_id), user.getId());
+                    bundle.putInt(getString(R.string.numberFragment), user.getId());
                     Navigation.findNavController(requireView()).navigate(R.id.verifiedFragment, bundle);
                 } else {
                     Toast.makeText(requireContext(), "not found!", Toast.LENGTH_SHORT).show();
                 }
             });
         });
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Navigation.findNavController(requireView()).navigate(R.id.loginFragment);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(requireActivity(), callback);
     }
 }

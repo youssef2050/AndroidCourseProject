@@ -20,4 +20,12 @@ public class ChangePasswordViewModel extends AndroidViewModel {
     public LiveData<User> checkOldPassword(String password, int id) {
         return userRepository.checkOldPassword(password, id);
     }
+
+    public void update(User user) {
+        userRepository.update(user);
+    }
+
+    public LiveData<User> getUser(int id) {
+        return userRepository.getUser(id);
+    }
 }

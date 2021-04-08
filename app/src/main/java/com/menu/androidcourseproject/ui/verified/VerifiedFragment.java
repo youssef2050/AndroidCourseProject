@@ -56,8 +56,6 @@ public class VerifiedFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        verifiedFragmentBinding.reSendCode.setEnabled(false);
-        verifiedFragmentBinding.reSendCode.setTextColor(Color.GRAY);
         super.onViewCreated(view, savedInstanceState);
         if (getArguments() == null) {
             int id = requireActivity().getSharedPreferences(getString(R.string.shared_key),
@@ -98,6 +96,8 @@ public class VerifiedFragment extends Fragment {
     }
 
     private void timer() {
+        verifiedFragmentBinding.reSendCode.setEnabled(false);
+        verifiedFragmentBinding.reSendCode.setTextColor(Color.GRAY);
         new CountDownTimer(30000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -169,7 +169,7 @@ public class VerifiedFragment extends Fragment {
                             Navigation.findNavController(requireView()).navigate(R.id.profileFragment);
                         } else {
                             Bundle bundle = new Bundle();
-                            bundle.putInt(getString(R.string.numberFragment), getArguments().getInt(getString(R.string.user_id)));
+                            bundle.putInt(getString(R.string.user_id), getArguments().getInt(getString(R.string.numberFragment)));
                             Navigation.findNavController(requireView()).navigate(R.id.changePasswordFragment, bundle);
                         }
                     } else {
